@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "653020001851",
+    "firebase_url": "https://smartloop-e-learning-default-rtdb.firebaseio.com",
+    "project_id": "smartloop-e-learning",
+    "storage_bucket": "smartloop-e-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653020001851:android:f4d933d10684d6e3a64e1e",
+        "android_client_info": {
+          "package_name": "com.smartloopLearn.learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653020001851-b939fo3kmkg9qcr9llm70gbueantd052.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartloopLearn.learning",
+            "certificate_hash": "c14cb6df5c9c63a8bccdbb0f0dedd38c620d617f"
+          }
+        },
+        {
+          "client_id": "653020001851-f1culj0i78d0jc1rkbn5ques4mj78c89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR_9FLhNm-PaBCACcojGIHaKbR8pSX4dE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653020001851-f1culj0i78d0jc1rkbn5ques4mj78c89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

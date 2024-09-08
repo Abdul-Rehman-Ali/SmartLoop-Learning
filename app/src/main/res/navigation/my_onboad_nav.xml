@@ -1,0 +1,43 @@
+<!-- nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_onboad_nav"
+    app:startDestination="@id/splashFragment">
+
+    <!-- SplashFragment -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.smartloopLearn.learning.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_viewPagerFregment"
+            app:destination="@id/viewPagerFregment"
+            app:popUpTo="@id/splashFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginSignUp"
+            app:destination="@id/loginSignUp"
+            app:popUpTo="@id/splashFragment" />
+    </fragment>
+
+    <!-- ViewPagerFragment -->
+    <fragment
+        android:id="@+id/viewPagerFregment"
+        android:name="com.smartloopLearn.learning.ViewPagerFregment"
+        android:label="fragment_view_pager_fregment"
+        tools:layout="@layout/fragment_view_pager_fregment" >
+        <action
+            android:id="@+id/action_viewPagerFregment_to_loginSignUp"
+            app:destination="@id/loginSignUp"
+            app:popUpTo="@id/viewPagerFregment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- LoginActivity -->
+    <activity
+        android:id="@+id/loginSignUp"
+        android:name="com.smartloopLearn.learning.LoginSignUp"
+        android:label="activity_login_sign_up"
+        tools:layout="@layout/activity_login_sign_up" />
+</navigation>

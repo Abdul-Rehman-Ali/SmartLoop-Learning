@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SmartLoop</string>
+
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="step_into_smartloop">step Into Smartloop!</string>
+    <string name="tv_username">Username</string>
+    <string name="default_web_client_id">default_web_client_id</string>
+</resources>

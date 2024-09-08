@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AboutUs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to Smartloop!"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="At Smartloop, we believe that education should be accessible, engaging, and tailored to fit the needs of every learner. Our mission is to revolutionize the way people learn by providing a comprehensive e-learning platform that combines cutting-edge technology with personalized education experiences." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our Vision"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our vision is to create a world where anyone, anywhere, has the power to learn and grow. We aim to bridge the gap between traditional education and modern learning needs by offering innovative solutions that cater to diverse learning styles and paces." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What We Offer"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Diverse Course Catalog" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - From coding and data science to arts and humanities, our extensive library of courses covers a wide range of subjects. Each course is designed by industry experts and experienced educators to ensure high-quality content." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Interactive Learning" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Engage with interactive lessons, quizzes, and hands-on projects that make learning fun and effective. Our platform uses the latest technology to create an immersive learning environment." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Personalized Learning Paths" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Everyone learns differently, and at Smartloop, we celebrate that. Our adaptive learning paths are customized to meet the individual needs of each learner, helping you achieve your goals at your own pace." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Expert Instructors" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Learn from the best! Our instructors are leaders in their fields, bringing real-world experience and insights into the classroom." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Community Support" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Join a thriving community of learners and educators. Collaborate on projects, participate in discussions, and support each other on your learning journey." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="Certification" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Earn certificates upon course completion to showcase your skills and boost your career prospects. Our certifications are recognized by industry leaders and educational institutions." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our Story"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smartloop was founded on the belief that education is a lifelong journey. Our team of educators, technologists, and innovators came together with a common goal: to create an e-learning platform that empowers individuals to reach their full potential. Since our inception, we have been dedicated to breaking down barriers to education and making learning accessible to everyone." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our Commitment"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We are committed to continuous improvement and innovation. We listen to our users and constantly update our platform to meet the evolving needs of learners worldwide. At Smartloop, your success is our success." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join Us"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Whether you're looking to gain new skills, advance your career, or simply explore new interests, Smartloop is here to guide you every step of the way. Join our community and start your learning journey today!" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Thank you for choosing Smartloop. Together, let's create a smarter future."
+            android:paddingTop="16dp" />
+    </LinearLayout>
+
+</ScrollView>

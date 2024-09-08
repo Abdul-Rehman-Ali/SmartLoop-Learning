@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="wrap_content"
+                android:layout_height="210dp"
+                android:layout_marginTop="50dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="5"
+                app:iss_delay="0"
+                app:iss_error_image="@drawable/not_selected_dot"
+                app:iss_period="1000"
+                app:iss_placeholder="@drawable/selected_dots"
+                app:iss_selected_dot="@drawable/selected_dots"
+                app:iss_text_align="CENTER"
+                app:iss_unselected_dot="@drawable/not_selected_dot"
+                tools:ignore="MissingClass,MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_categories"
+                android:layout_marginTop="270dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="We Provided"
+                app:layout_constraintEnd_toEndOf="@+id/image_slider"
+                app:layout_constraintTop_toBottomOf="@+id/image_slider"
+                />
+
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalcardview"
+                android:layout_marginTop="290dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/image_slider"
+                app:layout_constraintTop_toBottomOf="@+id/image_slider"
+                android:scrollbars="none"
+                >
+                <LinearLayout
+                    android:id="@+id/maincard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+                    <!--First card start-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_shape"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="80dp"
+                            app:cardElevation="5dp"
+                            android:layout_margin="5dp"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:background="#E9EAEC"
+                                app:cardElevation="2dp"
+                                android:padding="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.5"
+                                    android:src="@drawable/learning1"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textSize="12sp"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"
+                                        android:text="Courses" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <!--Second card start-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_shape"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="80dp"
+                            app:cardElevation="5dp"
+                            android:layout_margin="5dp"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:cardElevation="2dp"
+                                android:background="#E9EAEC"
+                                android:padding="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.5"
+                                    android:src="@drawable/learning2"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textSize="12sp"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"
+                                        android:text="Exams" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_shape"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="80dp"
+                            app:cardElevation="5dp"
+                            android:layout_margin="5dp"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:cardElevation="2dp"
+                                android:background="#E9EAEC"
+                                android:padding="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.5"
+                                    android:src="@drawable/learning3"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textSize="12sp"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"
+                                        android:text="Lectures" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_shape"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="80dp"
+                            app:cardElevation="5dp"
+                            android:layout_margin="5dp"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:cardElevation="2dp"
+                                android:background="#E9EAEC"
+                                android:padding="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.5"
+                                    android:src="@drawable/learning4"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textSize="12sp"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"
+                                        android:text="Notes" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_shape"
+                            app:cardCornerRadius="80dp"
+                            app:cardElevation="5dp"
+                            android:layout_margin="5dp"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:cardElevation="2dp"
+                                android:background="#E9EAEC"
+                                android:padding="15dp"
+                                >
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.5"
+                                    android:src="@drawable/learning5"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textSize="12sp"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"
+                                        android:text="MCQs" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/popular_categories"
+                android:layout_marginTop="430dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Popular Categories"
+                app:layout_constraintEnd_toEndOf="@+id/horizontalcardview"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalcardview"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="65dp"
+                android:layout_below="@+id/popular_categories"
+                />
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</ScrollView>

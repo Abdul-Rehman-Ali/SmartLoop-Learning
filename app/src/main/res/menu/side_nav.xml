@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single"
+        >
+        <item
+            android:id="@+id/nav_side_home"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Home"
+            />
+        <item
+            android:id="@+id/nav_side_course"
+            android:icon="@drawable/courses"
+            android:title="Quizes"
+            />
+        <item
+            android:id="@+id/nav_side_search"
+            android:icon="@drawable/message"
+            android:title="Chat"
+            />
+        <item
+            android:id="@+id/nav_side_profile"
+            android:icon="@drawable/account"
+            android:title="Account"
+            />
+        <item
+            android:id="@+id/update_password"
+            android:icon="@drawable/update_password"
+            android:title="Update Password"
+            />
+        <item
+            android:id="@+id/delete_account"
+            android:icon="@drawable/delete_account"
+            android:title="Delete Account"
+            />
+        <item
+            android:id="@+id/contact_us"
+            android:icon="@drawable/contact_us"
+            android:title="Contact Us"
+            />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/feedback"
+            android:title="Feedback"
+            />
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/about_us"
+            android:title="About Us"
+            />
+        <item
+            android:id="@+id/privacy_policy"
+            android:icon="@drawable/privacy_policy"
+            android:title="Privacy Policy"
+            />
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/logout"
+            android:title="Log Out"
+            />
+    </group>
+</menu>

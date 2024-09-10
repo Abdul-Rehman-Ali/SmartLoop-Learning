@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
+import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.databinding.DialogEditProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -134,11 +135,10 @@ class ProfileFragment : Fragment() {
             requireContext().startActivity(i)
         }
 
-//        binding.helpSupportLayout.setOnClickListener {
-//            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-//            fragmentTransaction?.replace(R.id.fragment_container, SearchFragment())
-//            fragmentTransaction?.commit()
-//        }
+        binding.newsLayout.setOnClickListener {
+            val i = Intent(requireContext(), DashboardUserActivity::class.java)
+            requireContext().startActivity(i)
+        }
     }
 
     private fun openGallery() {

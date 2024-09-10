@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment using view binding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,14 +50,10 @@ class HomeFragment : Fragment() {
 
         binding.imageSlider.setImageList(imgList, ScaleTypes.FIT)
 
-
-
         // Recycler View
         binding.rv.adapter = RVAdapter(Constant.getData(), requireContext())
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
     }
-
-
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()

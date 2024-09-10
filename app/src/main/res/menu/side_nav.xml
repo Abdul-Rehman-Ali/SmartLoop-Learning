@@ -42,6 +42,11 @@
             android:title="Contact Us"
             />
         <item
+            android:id="@+id/news"
+            android:icon="@drawable/baseline_newspaper_24"
+            android:title="News"
+            />
+        <item
             android:id="@+id/feedback"
             android:icon="@drawable/feedback"
             android:title="Feedback"

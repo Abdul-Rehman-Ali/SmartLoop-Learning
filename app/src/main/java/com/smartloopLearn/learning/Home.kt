@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.smartloopLearn.learning.admin.DashboardUserActivity
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var auth: FirebaseAuth
@@ -82,6 +83,10 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             }
             R.id.update_password -> {
                 val i = Intent(this, CreateNewPassword::class.java)
+                startActivity(i)
+            }
+            R.id.news ->{
+                val i = Intent(this, DashboardUserActivity::class.java)
                 startActivity(i)
             }
             // ---- Delete User ----

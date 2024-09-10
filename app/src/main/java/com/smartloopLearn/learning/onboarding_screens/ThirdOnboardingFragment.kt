@@ -27,8 +27,8 @@ class ThirdOnboardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.letsGo.setOnClickListener {
-                finishedOnboarding()
-                findNavController().navigate(R.id.action_viewPagerFregment_to_loginSignUp)
+            findNavController().navigate(R.id.action_viewPagerFregment_to_loginSignUp)
+            finishedOnboarding()
         }
     }
 

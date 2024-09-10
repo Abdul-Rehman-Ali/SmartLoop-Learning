@@ -134,11 +134,11 @@ class ProfileFragment : Fragment() {
             requireContext().startActivity(i)
         }
 
-        binding.helpSupportLayout.setOnClickListener {
-            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragment_container, SearchFragment())
-            fragmentTransaction?.commit()
-        }
+//        binding.helpSupportLayout.setOnClickListener {
+//            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.fragment_container, SearchFragment())
+//            fragmentTransaction?.commit()
+//        }
     }
 
     private fun openGallery() {

@@ -28,9 +28,9 @@
         <activity
             android:name=".admin.DashboardUserActivity"
             android:exported="false" />
-        <activity
-            android:name=".DashboardUserActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".DashboardUserActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".PdfViewActivity"
             android:exported="false" />
@@ -53,7 +53,7 @@
             android:name=".admin.DashboardAdmin"
             android:exported="false" />
         <activity
-            android:name=".Feedback"
+            android:name=".student.view.activities.Feedback"
             android:exported="false" />
         <activity
             android:name=".PrivacyPolicy"
@@ -65,37 +65,35 @@
             android:name=".WebDevelopment"
             android:exported="false" />
         <activity
-            android:name=".Home"
-            android:exported="false"
-            android:theme="@style/Theme.NoToolbar" />
-        <activity
-            android:name=".PasswordChanged"
+            android:name=".student.view.activities.Home"
             android:exported="false" />
         <activity
-            android:name=".CreateNewPassword"
+            android:name=".auth.PasswordChanged"
             android:exported="false" />
         <activity
-            android:name=".OtpVarification"
+            android:name=".auth.CreateNewPassword"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword"
+            android:name=".auth.OtpVarification"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".auth.ForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".auth.SignUp"
             android:exported="false" />
         <activity
-            android:name=".LoginSignUp"
+            android:name=".auth.Login"
+            android:exported="false" />
+        <activity
+            android:name=".auth.LoginSignUp"
             android:exported="false" />
         <activity
             android:name=".admin.CategoryAddActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoToolbar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

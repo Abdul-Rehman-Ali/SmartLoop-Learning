@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.SmartLoop" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Base.Theme.SmartLoop" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimaryDark">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
@@ -9,10 +9,14 @@
 
     <style name="Theme.SmartLoop" parent="Base.Theme.SmartLoop" />
 
-    <style name="Theme.NoToolbar" parent="Base.Theme.SmartLoop">
-        <!-- Override attributes related to the toolbar to remove it -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+<!--    <style name="Theme.NoToolbar" parent="Base.Theme.SmartLoop">-->
+<!--        &lt;!&ndash; Override attributes related to the toolbar to remove it &ndash;&gt;-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
+
+    <style name="CustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="itemBackground">@drawable/bsv_custom_indicator</item>
     </style>
 
 </resources>

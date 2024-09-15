@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning
+package com.smartloopLearn.learning.student.view.activities
 
 import android.content.Intent
 import android.net.Uri

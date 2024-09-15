@@ -37,7 +37,7 @@
     <!-- LoginActivity -->
     <activity
         android:id="@+id/loginSignUp"
-        android:name="com.smartloopLearn.learning.LoginSignUp"
+        android:name="com.smartloopLearn.learning.auth.LoginSignUp"
         android:label="activity_login_sign_up"
         tools:layout="@layout/activity_login_sign_up" />
 </navigation>

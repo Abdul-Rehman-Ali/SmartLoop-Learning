@@ -11,4 +11,5 @@
     <string name="step_into_smartloop">step Into Smartloop!</string>
     <string name="tv_username">Username</string>
     <string name="default_web_client_id">default_web_client_id</string>
+    <string name="sign_in">Sign In</string>
 </resources>

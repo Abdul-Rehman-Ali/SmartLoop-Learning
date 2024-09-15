@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning
+package com.smartloopLearn.learning.auth
 
 import android.content.Intent
 import android.net.Uri

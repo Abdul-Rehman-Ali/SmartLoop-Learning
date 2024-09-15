@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning.fragments
+package com.smartloopLearn.learning.student.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.smartloopLearn.learning.HomeRV.Constant
-import com.smartloopLearn.learning.HomeRV.RVAdapter
+import com.smartloopLearn.learning.student.Utils.Constant
+import com.smartloopLearn.learning.student.Utils.Constant.getDataContinueCourses
+import com.smartloopLearn.learning.student.Utils.Constant.getDataWeProvided
+import com.smartloopLearn.learning.student.adapter.recyclerview.RVAdapter
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.FragmentHomeBinding
+import com.smartloopLearn.learning.student.adapter.recyclerview.ContinueCoursesAdapter
+import com.smartloopLearn.learning.student.adapter.recyclerview.WeProvided
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null // Declare binding variable
@@ -33,7 +38,6 @@ class HomeFragment : Fragment() {
 //                // Handle exception (e.g., log error, display a message)
 //            }
 //        }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +57,32 @@ class HomeFragment : Fragment() {
         // Recycler View
         binding.rv.adapter = RVAdapter(Constant.getData(), requireContext())
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
+
+
+//        setUpContinueCoursesRV()
+
+        setUpWeProvided()
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        // Nullify the binding reference to avoid memory leaks
-//        _binding = null
-//    }
+    private fun setUpWeProvided() {
+        val adapter  = WeProvided(getDataWeProvided(), requireContext())
+
+        binding.rvWeProvided.adapter = adapter
+        binding.rvWeProvided.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun setUpContinueCoursesRV() {
+
+
+        val adapter  = ContinueCoursesAdapter(getDataContinueCourses(), requireContext())
+
+        binding.rvContinueCourses.adapter = adapter
+        binding.rvContinueCourses.layoutManager = GridLayoutManager(requireContext(), 2)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Nullify the binding reference to avoid memory leaks
+        _binding = null
+    }
 }

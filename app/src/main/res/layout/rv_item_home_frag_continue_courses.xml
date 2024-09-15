@@ -17,7 +17,7 @@
 
         <!-- Course Image -->
         <ImageView
-            android:id="@+id/courseImage"
+            android:id="@+id/ivContinueCourseImage"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
@@ -33,7 +33,7 @@
 
             <!-- Course Name -->
             <TextView
-                android:id="@+id/courseName"
+                android:id="@+id/tvContinueCourseName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,19 +44,19 @@
 
             <!-- Course Rating (5 stars) -->
             <RatingBar
-                android:id="@+id/courseRating"
+                android:id="@+id/rbContinueCourseRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:numStars="5"
                 android:stepSize="0.5"
-                android:rating="4.5"
+                android:rating="4.8"
                 style="?android:attr/ratingBarStyleSmall"/>
         </LinearLayout>
 
         <!-- Teacher Name -->
         <TextView
-            android:id="@+id/teacherName"
+            android:id="@+id/tvContinueCourseTeacherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Teacher Name"
@@ -67,7 +67,7 @@
 
         <!-- Progress Bar -->
         <ProgressBar
-            android:id="@+id/courseProgress"
+            android:id="@+id/pbContinueCourseProgress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

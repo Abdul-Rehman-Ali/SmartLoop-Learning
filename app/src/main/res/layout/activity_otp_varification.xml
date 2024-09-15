@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back01"
     android:fillViewport="true">
 
     <LinearLayout
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#F4EFEF"
-        tools:context=".OtpVarification">
+        tools:context=".auth.OtpVarification">
 
 
         <TextView

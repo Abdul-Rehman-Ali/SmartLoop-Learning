@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning.fragments
+package com.smartloopLearn.learning.student.view.fragments
 
 import android.content.Intent
 import android.net.Uri

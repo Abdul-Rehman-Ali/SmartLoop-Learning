@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:paddingEnd="10dp"
     android:paddingStart="10dp"
-    tools:context=".fragments.CourseFragment">
+    android:background="@drawable/back01"
+    tools:context=".student.view.fragments.CourseFragment">
 
     <RelativeLayout
         android:id="@+id/quiz_layout"
@@ -61,18 +62,27 @@
         android:layout_height="match_parent"
         android:layout_marginTop="260dp"
         >
+
         <ProgressBar
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            layout="@layout/custom_loader"
+            android:id="@+id/customProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
             android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:id="@+id/progress_bar"/>
+            android:progressDrawable="@drawable/custom_progress_bar"
+            android:visibility="gone" />
+
+<!--        <include-->
+<!--            layout="@layout/custom_loader"-->
+<!--            android:id="@+id/customProgressBar"-->
+<!--            android:visibility="gone"-->
+<!--             />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="68dp"/>
-
     </RelativeLayout>
 </FrameLayout>

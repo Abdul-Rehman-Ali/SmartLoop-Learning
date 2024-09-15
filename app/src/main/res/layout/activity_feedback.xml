@@ -6,7 +6,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Feedback">
+    android:background="@drawable/back01"
+    tools:context=".student.view.activities.Feedback">
 
     <ScrollView
         android:layout_width="match_parent"

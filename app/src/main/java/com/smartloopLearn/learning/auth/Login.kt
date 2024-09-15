@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning
+package com.smartloopLearn.learning.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +18,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.smartloopLearn.learning.student.view.activities.Home
+import com.smartloopLearn.learning.R
 import java.util.Calendar
 
 class Login : AppCompatActivity() {

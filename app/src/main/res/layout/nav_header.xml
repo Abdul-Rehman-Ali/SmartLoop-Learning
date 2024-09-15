@@ -13,9 +13,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@color/white"
         android:layout_gravity="center"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unlock your potential with SmartLoop! Explore courses, enhance your skills, and start learning today. Download the app now and take the first step towards success!"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        />
+
 
 </LinearLayout>

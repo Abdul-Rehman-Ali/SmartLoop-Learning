@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning.HomeRV
+package com.smartloopLearn.learning.student.adapter.recyclerview
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.admin.DashboardUserActivity
+import com.smartloopLearn.learning.student.model.RVModel
 
 class RVAdapter(private val list: ArrayList<RVModel>, private val context: Context) : RecyclerView.Adapter<OurVH>() {
 

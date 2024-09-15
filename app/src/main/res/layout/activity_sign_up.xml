@@ -6,14 +6,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back01"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#F4EFEF"
-        tools:context=".SignUp">
+        tools:context=".auth.SignUp">
 
         <TextView
             android:id="@+id/login_greet"
@@ -39,29 +39,6 @@
             android:fontFamily="sans-serif-condensed"
             />
 
-<!--        <TextView-->
-<!--            android:id="@+id/username"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/tv_username"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textColor="#474545"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            android:fontFamily="sans-serif-condensed"-->
-<!--            />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/et_username"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Enter Your Name"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:background="@drawable/login_et"-->
-<!--            android:layout_marginRight="30dp"-->
-<!--            android:autofillHints="emailAddress"-->
-<!--            android:inputType="text" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInputLayout"
@@ -79,7 +56,6 @@
                 android:hint="Username"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:background="@drawable/edit_text_border"
                 android:textColorHint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +99,6 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:background="@drawable/edit_text_border"
                 android:textColorHint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,7 +142,6 @@
                 android:hint="Phone No."
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:background="@drawable/edit_text_border"
                 android:textColorHint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,7 +162,6 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:background="@drawable/edit_text_border"
                 android:textColorHint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,7 +182,6 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:background="@drawable/edit_text_border"
                 android:textColorHint="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,14 +224,34 @@
             android:text="Sign Up"
             android:textColor="@color/white" />
 
-        <ImageView
-            android:layout_marginTop="15dp"
-            android:layout_width="150sp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/loginsign" />
+        <TextView
+            android:id="@+id/signUpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Already have an account?  "
+            android:textColor="@color/primary"
+            android:layout_gravity="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/accent"
+            android:layout_gravity="center"
+            android:textSize="14sp" />
+
+<!--        <ImageView-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_width="150sp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginRight="30dp"-->
+<!--            android:layout_marginBottom="40dp"-->
+<!--            android:src="@drawable/loginsign" />-->
 
     </LinearLayout>
 </ScrollView>

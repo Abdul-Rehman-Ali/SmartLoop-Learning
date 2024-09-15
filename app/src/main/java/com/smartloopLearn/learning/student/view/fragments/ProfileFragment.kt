@@ -1,4 +1,4 @@
-package com.smartloopLearn.learning.fragments
+package com.smartloopLearn.learning.student.view.fragments
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -22,7 +23,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.admin.DashboardUserActivity
+import com.smartloopLearn.learning.auth.CreateNewPassword
 import com.smartloopLearn.learning.databinding.DialogEditProfileBinding
+import com.smartloopLearn.learning.student.view.activities.Feedback
 
 class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -30,9 +33,16 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    companion object {
+        private val TAG = "TestingProfileFragment"
+    }
+
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private val sharedPrefFile = "smartloopLearnPrefs"
     private val profileImageUriKey = "profile_image_uri"
+    private val sharedPrefNameKey = "user_name"
+    private val sharedPrefEmailKey = "user_email"
+    private val sharedPrefPhoneKey = "user_phone"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +59,7 @@ class ProfileFragment : Fragment() {
         firestore = FirebaseFirestore.getInstance()
 
         val currentUser = auth.currentUser
+        Log.d(TAG, "Current User: $currentUser")
 
         // Initialize the image picker launcher
         pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -64,35 +75,17 @@ class ProfileFragment : Fragment() {
         // Load profile image from SharedPreferences
         loadProfileImage()
 
-        if (currentUser != null) {
-            // Fetch user data from Firestore
-            firestore.collection("users").document(currentUser.uid).get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        val name = document.getString("name")
-                        val email = document.getString("email")
-                        val phone = document.getString("phone")
+        // Load user details from SharedPreferences
+        loadUserDetails()
 
-                        binding.profileUsername.text = name ?: "No Username"
-                        binding.profileEmail.text = email ?: "No Email"
-                        binding.profilePhone.text = phone ?: "No Phone Number"
-                    } else {
-                        Toast.makeText(requireContext(), "No user data found", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(requireContext(), "Failed to fetch user data: ${exception.localizedMessage}", Toast.LENGTH_SHORT).show()
-                }
+        // Show edit profile dialog when the edit button is clicked
+        binding.editProfile.setOnClickListener {
+            showEditProfileDialog(currentUser)
+        }
 
-            // Show edit profile dialog when the edit button is clicked
-            binding.editProfile.setOnClickListener {
-                showEditProfileDialog(currentUser)
-            }
-
-            // Open gallery to select a new profile image when profile image is clicked
-            binding.profileImage.setOnClickListener {
-                openGallery()
-            }
+        // Open gallery to select a new profile image when profile image is clicked
+        binding.profileImage.setOnClickListener {
+            openGallery()
         }
 
         // Set up logout and delete user functionality
@@ -161,6 +154,20 @@ class ProfileFragment : Fragment() {
             val uri = Uri.parse(it)
             binding.profileImage.setImageURI(uri)
         }
+    }
+
+    private fun loadUserDetails() {
+        val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+
+        // Retrieve the stored user details
+        val userName = sharedPreferences.getString(sharedPrefNameKey, "N/A")
+        val userEmail = sharedPreferences.getString(sharedPrefEmailKey, "N/A")
+        val userPhone = sharedPreferences.getString(sharedPrefPhoneKey, "N/A")
+
+        // Set the details to the UI elements
+        binding.profileUsername.text = userName
+        binding.profileEmail.text = userEmail
+        binding.profilePhone.text = userPhone
     }
 
     private fun showEditProfileDialog(user: FirebaseUser?) {

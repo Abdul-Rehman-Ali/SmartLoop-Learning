@@ -19,9 +19,9 @@
         <ImageView
             android:id="@+id/ivAllCourseImage"
             android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
+            android:layout_height="120dp"
+            android:layout_weight="1.5"
+            android:scaleType="fitXY"
             android:layout_margin="10dp"
             android:src="@drawable/webdevelopmentslider" />
 
@@ -31,8 +31,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_marginStart="8dp"
-            android:paddingStart="10dp"
             android:gravity="start">
 
             <!-- Course Name -->
@@ -41,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course Name"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
@@ -69,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="PKR"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@android:color/black" />
 
                 <!-- Dynamic Price Text -->
@@ -78,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5000"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="4dp" />
 
@@ -89,7 +87,6 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center_vertical">
 
                 <!-- Course Rating (5 stars) -->
@@ -109,7 +106,7 @@
                     android:id="@+id/ivFavoriteIcon"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:layout_marginStart="70dp"
+                    android:layout_marginStart="50dp"
                     android:src="@drawable/baseline_favorite_border_24" />
             </LinearLayout>
 

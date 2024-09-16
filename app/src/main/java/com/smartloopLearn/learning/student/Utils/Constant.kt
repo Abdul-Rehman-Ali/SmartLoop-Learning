@@ -25,7 +25,8 @@ object Constant {
     fun getDataContinueCourses(): ArrayList<ContinueCourse> {
         return arrayListOf(
             ContinueCourse(0, R.drawable.web, "Web Developement", "Jamal The Expert", 4.5, 60),
-            ContinueCourse(1, R.drawable.python, "Python", "Mudassar the pythonist", 4.2, 90)
+            ContinueCourse(1, R.drawable.python, "Python", "Mudassar the pythonist", 4.2, 30),
+            ContinueCourse(1, R.drawable.appdevelopment, "App Development", "Muhammad Jamil", 3.1, 100)
         )
     }
 

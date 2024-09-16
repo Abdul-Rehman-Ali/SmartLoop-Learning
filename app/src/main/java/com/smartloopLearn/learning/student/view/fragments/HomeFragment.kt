@@ -1,5 +1,6 @@
 package com.smartloopLearn.learning.student.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,14 +10,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.smartloopLearn.learning.student.Utils.Constant
 import com.smartloopLearn.learning.student.Utils.Constant.getDataContinueCourses
 import com.smartloopLearn.learning.student.Utils.Constant.getDataWeProvided
-import com.smartloopLearn.learning.student.adapter.recyclerview.RVAdapter
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.FragmentHomeBinding
+import com.smartloopLearn.learning.student.Utils.Constant
+import com.smartloopLearn.learning.student.Utils.Constant.getDataCourses
 import com.smartloopLearn.learning.student.adapter.recyclerview.ContinueCoursesAdapter
+import com.smartloopLearn.learning.student.adapter.recyclerview.Courses
+import com.smartloopLearn.learning.student.adapter.recyclerview.RVAdapter
 import com.smartloopLearn.learning.student.adapter.recyclerview.WeProvided
+import com.smartloopLearn.learning.student.view.activities.AllCourses
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null // Declare binding variable
@@ -29,6 +33,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment using view binding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
 
 //        binding.webDevelopment.setOnClickListener {
 //            try {
@@ -43,6 +48,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.allCourses.setOnClickListener {
+                val intent = Intent(requireActivity(), AllCourses::class.java)
+                startActivity(intent)
+            }
+
         // Load images and set up ImageSlider
         val imgList = ArrayList<SlideModel>()
         imgList.add(SlideModel((R.drawable.webdevelopmentslider), "Web Development"))
@@ -54,14 +64,22 @@ class HomeFragment : Fragment() {
 
         binding.imageSlider.setImageList(imgList, ScaleTypes.FIT)
 
-        // Recycler View
-        binding.rv.adapter = RVAdapter(Constant.getData(), requireContext())
-        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        // Category Recycler View
+//        binding.rv.adapter = RVAdapter(Constant.getData(), requireContext())
+//        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
 
+        setUpCoursesRV()
 
-//        setUpContinueCoursesRV()
+        setUpContinueCoursesRV()
 
         setUpWeProvided()
+    }
+
+    private fun setUpCoursesRV() {
+        val adapter  = Courses(getDataCourses(), requireContext())
+
+        binding.rv.adapter = adapter
+        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun setUpWeProvided() {
@@ -77,7 +95,7 @@ class HomeFragment : Fragment() {
         val adapter  = ContinueCoursesAdapter(getDataContinueCourses(), requireContext())
 
         binding.rvContinueCourses.adapter = adapter
-        binding.rvContinueCourses.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvContinueCourses.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun onDestroyView() {

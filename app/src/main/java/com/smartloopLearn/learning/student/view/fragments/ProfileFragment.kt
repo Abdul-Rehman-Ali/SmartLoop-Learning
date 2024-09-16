@@ -26,6 +26,7 @@ import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.auth.CreateNewPassword
 import com.smartloopLearn.learning.databinding.DialogEditProfileBinding
 import com.smartloopLearn.learning.student.view.activities.Feedback
+import com.smartloopLearn.learning.student.view.activities.PrivacyPolicy
 
 class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth

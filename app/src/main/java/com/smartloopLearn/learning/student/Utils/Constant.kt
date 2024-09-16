@@ -3,6 +3,7 @@ package com.smartloopLearn.learning.student.Utils
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.student.model.RVModel
 import com.smartloopLearn.learning.student.model.ContinueCourse
+import com.smartloopLearn.learning.student.model.Courses
 import com.smartloopLearn.learning.student.model.WeProvided
 
 object Constant {
@@ -34,6 +35,19 @@ object Constant {
             WeProvided(1, R.drawable.learning3, "Lectures"),
             WeProvided(1, R.drawable.learning4, "Notes"),
             WeProvided(1, R.drawable.learning5, "MCQs")
+        )
+    }
+
+    fun getDataCourses(): ArrayList<Courses> {
+        return arrayListOf(
+            Courses(0, R.drawable.webdevelopmentslider, "Web Developement", "Jamal The Expert", 4.5),
+            Courses(1, R.drawable.pythonslider, "Python", "Mudassar the pythonist", 4.2),
+            Courses(2, R.drawable.aislider, "AI", "Ali Sher Kashif", 4.2),
+            Courses(3, R.drawable.digitalmarketingslider, "Marketing", "Ahmad Shaf", 5.0),
+            Courses(4, R.drawable.appdevelopmentslider, "App Development", "Muhammad Jamil", 3.1),
+            Courses(5, R.drawable.seoslider, "SEO", "Zafar Roy", 3.0),
+
+
         )
     }
 }

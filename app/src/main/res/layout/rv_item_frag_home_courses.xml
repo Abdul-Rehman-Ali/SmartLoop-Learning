@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start">
+
+        <!-- Course Image -->
+        <ImageView
+            android:id="@+id/ivCourseImage"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/webdevelopmentslider" />
+
+        <!-- Course Name -->
+        <TextView
+            android:id="@+id/tvCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Name"
+            android:textSize="14sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:gravity="start"/>
+
+        <!-- Teacher Name -->
+        <TextView
+            android:id="@+id/tvCourseTeacherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher Name"
+            android:textSize="12sp"
+            android:paddingStart="10dp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="4dp"
+            android:gravity="start"/>
+
+        <!-- Course Rating -->
+        <RatingBar
+            android:id="@+id/rbCourseRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="4.8"
+            android:layout_marginTop="4dp"
+            android:paddingStart="10dp"
+            android:paddingBottom="5dp"
+            style="?android:attr/ratingBarStyleSmall"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

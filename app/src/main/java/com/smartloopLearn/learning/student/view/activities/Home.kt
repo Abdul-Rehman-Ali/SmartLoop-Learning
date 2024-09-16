@@ -24,7 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.smartloopLearn.learning.AboutUs
 import com.smartloopLearn.learning.auth.CreateNewPassword
-import com.smartloopLearn.learning.PrivacyPolicy
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.auth.LoginSignUp

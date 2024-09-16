@@ -14,11 +14,9 @@ import com.smartloopLearn.learning.student.Utils.Constant.getDataContinueCourses
 import com.smartloopLearn.learning.student.Utils.Constant.getDataWeProvided
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.FragmentHomeBinding
-import com.smartloopLearn.learning.student.Utils.Constant
 import com.smartloopLearn.learning.student.Utils.Constant.getDataCourses
 import com.smartloopLearn.learning.student.adapter.recyclerview.ContinueCoursesAdapter
 import com.smartloopLearn.learning.student.adapter.recyclerview.Courses
-import com.smartloopLearn.learning.student.adapter.recyclerview.RVAdapter
 import com.smartloopLearn.learning.student.adapter.recyclerview.WeProvided
 import com.smartloopLearn.learning.student.view.activities.AllCourses
 
@@ -34,15 +32,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
 
-
-//        binding.webDevelopment.setOnClickListener {
-//            try {
-//                val intent = Intent(requireActivity(), WebDevelopment::class.java)
-//                startActivity(intent)
-//            } catch (e: Exception) {
-//                // Handle exception (e.g., log error, display a message)
-//            }
-//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,7 +79,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpContinueCoursesRV() {
-
 
         val adapter  = ContinueCoursesAdapter(getDataContinueCourses(), requireContext())
 

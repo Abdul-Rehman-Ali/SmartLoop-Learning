@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course Name"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="PKR"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
                 <!-- Dynamic Price Text -->
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5000"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="4dp" />
 
@@ -104,8 +104,8 @@
                 <!-- Favorite Icon -->
                 <ImageView
                     android:id="@+id/ivFavoriteIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="50dp"
                     android:src="@drawable/baseline_favorite_border_24" />
             </LinearLayout>
@@ -113,5 +113,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

@@ -109,8 +109,6 @@
                     android:layout_marginStart="50dp"
                     android:src="@drawable/baseline_favorite_border_24" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -89,10 +89,30 @@ class ProfileFragment : Fragment() {
             openGallery()
         }
 
-        // Set up logout and delete user functionality
         binding.logoutLayout.setOnClickListener {
+            // Sign out the user
             auth.signOut()
+
+            // Clear app cache
+            try {
+                val cacheDir = requireContext().cacheDir
+                if (cacheDir.isDirectory) {
+                    cacheDir.deleteRecursively()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            // Clear shared preferences
+            val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()  // Clear all the shared preferences
+            editor.apply()
+
+            // Show logout success message
             Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show()
+
+            // Finish the activity
             requireActivity().finish()
         }
 
@@ -209,11 +229,20 @@ class ProfileFragment : Fragment() {
                 authUpdateTask?.let { allTasks.add(it) }
                 emailUpdateTask?.let { allTasks.add(it) }
 
+                // Update Firestore
                 if (firestoreUpdates.isNotEmpty()) {
                     val firestoreTask = firestore.collection("users").document(user.uid)
                         .update(firestoreUpdates)
                     allTasks.add(firestoreTask)
                 }
+
+                // Update in SharedPreferences
+                val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                if (newName.isNotEmpty()) editor.putString(sharedPrefNameKey, newName)
+                if (newEmail.isNotEmpty()) editor.putString(sharedPrefEmailKey, newEmail)
+                if (newPhone.isNotEmpty()) editor.putString(sharedPrefPhoneKey, newPhone)
+                editor.apply()
 
                 Tasks.whenAllComplete(allTasks).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -238,7 +267,6 @@ class ProfileFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Destroy the binding when the fragment is destroyed
         _binding = null
     }
 }

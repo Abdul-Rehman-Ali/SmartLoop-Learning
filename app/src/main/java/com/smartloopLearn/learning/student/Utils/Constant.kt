@@ -51,14 +51,14 @@ object Constant {
 //        )
 //    }
 
-    fun getDataAllCourses(): ArrayList<AllCourses> {
-        return arrayListOf(
-            AllCourses(0, R.drawable.webdevelopmentslider, "Web Developement", "Jamal The Expert", 4.5, 5000),
-            AllCourses(1, R.drawable.pythonslider, "Python", "Mudassar the pythonist", 4.2, 7000),
-            AllCourses(2, R.drawable.aislider, "AI", "Ali Sher Kashif", 4.2, 15000),
-            AllCourses(3, R.drawable.digitalmarketingslider, "Marketing", "Ahmad Shaf", 5.0, 9000),
-            AllCourses(4, R.drawable.appdevelopmentslider, "App Development", "Muhammad Jamil", 3.1, 10000),
-            AllCourses(5, R.drawable.seoslider, "SEO", "Zafar Roy", 3.0, 12000),
-        )
-    }
+//    fun getDataAllCourses(): ArrayList<AllCourses> {
+//        return arrayListOf(
+//            AllCourses(0, R.drawable.webdevelopmentslider, "Web Developement", "Jamal The Expert", 4.5, 5000),
+//            AllCourses(1, R.drawable.pythonslider, "Python", "Mudassar the pythonist", 4.2, 7000),
+//            AllCourses(2, R.drawable.aislider, "AI", "Ali Sher Kashif", 4.2, 15000),
+//            AllCourses(3, R.drawable.digitalmarketingslider, "Marketing", "Ahmad Shaf", 5.0, 9000),
+//            AllCourses(4, R.drawable.appdevelopmentslider, "App Development", "Muhammad Jamil", 3.1, 10000),
+//            AllCourses(5, R.drawable.seoslider, "SEO", "Zafar Roy", 3.0, 12000),
+//        )
+//    }
 }

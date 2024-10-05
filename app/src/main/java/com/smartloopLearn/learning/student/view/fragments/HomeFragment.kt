@@ -103,7 +103,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -161,13 +160,10 @@ class HomeFragment : Fragment() {
         setUpContinueCoursesRV() // Continue Courses RecyclerView
 
         // Fetch courses from Firestore
-        fetchCoursesFromFirestore()
+//        fetchCoursesFromFirestore()
     }
 
     private fun setUpCoursesRV() {
-//        coursesAdapter = CoursesAdapter(coursesList, requireContext())
-//        binding.rv.adapter = coursesAdapter
-//        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
         coursesAdapter = CoursesAdapter(coursesList, requireContext())
         binding.rv.adapter = coursesAdapter
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)

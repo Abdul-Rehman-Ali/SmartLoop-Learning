@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.auth.CreateNewPassword
 import com.smartloopLearn.learning.databinding.DialogEditProfileBinding
+import com.smartloopLearn.learning.student.Utils.UserSharedPref
 import com.smartloopLearn.learning.student.view.activities.Feedback
 import com.smartloopLearn.learning.student.view.activities.PrivacyPolicy
 
@@ -77,7 +78,7 @@ class ProfileFragment : Fragment() {
         loadProfileImage()
 
         // Load user details from SharedPreferences
-        loadUserDetails()
+        UserSharedPref.loadUserDetails(context, binding)
 
         // Show edit profile dialog when the edit button is clicked
         binding.editProfile.setOnClickListener {
@@ -90,6 +91,10 @@ class ProfileFragment : Fragment() {
         }
 
         binding.logoutLayout.setOnClickListener {
+            val sharedPreferences = requireContext().getSharedPreferences("userLoginInfo", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
             // Sign out the user
             auth.signOut()
 
@@ -103,17 +108,21 @@ class ProfileFragment : Fragment() {
                 e.printStackTrace()
             }
 
-            // Clear shared preferences
-            val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.clear()  // Clear all the shared preferences
-            editor.apply()
-
-            // Show logout success message
-            Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show()
-
-            // Finish the activity
+            UserSharedPref.clearUserData(requireContext())
             requireActivity().finish()
+
+
+            // Clear shared preferences
+//            val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+//            val editor = sharedPreferences.edit()
+//            editor.clear()  // Clear all the shared preferences
+//            editor.apply()
+//
+//            // Show logout success message
+//            Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show()
+//
+//            // Finish the activity
+//            requireActivity().finish()
         }
 
         binding.deleteUserLayout.setOnClickListener {
@@ -177,19 +186,19 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun loadUserDetails() {
-        val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-
-        // Retrieve the stored user details
-        val userName = sharedPreferences.getString(sharedPrefNameKey, "N/A")
-        val userEmail = sharedPreferences.getString(sharedPrefEmailKey, "N/A")
-        val userPhone = sharedPreferences.getString(sharedPrefPhoneKey, "N/A")
-
-        // Set the details to the UI elements
-        binding.profileUsername.text = userName
-        binding.profileEmail.text = userEmail
-        binding.profilePhone.text = userPhone
-    }
+//    private fun loadUserDetails() {
+//        val sharedPreferences = requireContext().getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+//
+//        // Retrieve the stored user details
+//        val userName = sharedPreferences.getString(sharedPrefNameKey, "N/A")
+//        val userEmail = sharedPreferences.getString(sharedPrefEmailKey, "N/A")
+//        val userPhone = sharedPreferences.getString(sharedPrefPhoneKey, "N/A")
+//
+//        // Set the details to the UI elements
+//        binding.profileUsername.text = userName
+//        binding.profileEmail.text = userEmail
+//        binding.profilePhone.text = userPhone
+//    }
 
     private fun showEditProfileDialog(user: FirebaseUser?) {
         if (user == null) return

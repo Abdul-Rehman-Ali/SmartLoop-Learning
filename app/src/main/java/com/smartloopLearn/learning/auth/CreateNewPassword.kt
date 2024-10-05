@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.smartloopLearn.learning.databinding.ActivityCreateNewPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.smartloopLearn.learning.student.Utils.UserSharedPref
 
 class CreateNewPassword : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -30,9 +32,12 @@ class CreateNewPassword : AppCompatActivity() {
                         Toast.makeText(this, "Update Successfully",
                             Toast.LENGTH_SHORT).show()
                         clearFields()
+                        UserSharedPref.clearUserData(this)
                         val i = Intent(this, Login::class.java)
-                        finish()
+
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(i)
+                        finish()
                     } else {
                         Toast.makeText(baseContext, "Password not updated",
                             Toast.LENGTH_SHORT).show()

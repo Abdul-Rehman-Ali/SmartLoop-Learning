@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.smartloopLearn.learning.databinding.ActivityAllCoursesBinding
 import com.smartloopLearn.learning.student.Utils.Constant.getDataAllCourses
 import com.smartloopLearn.learning.student.adapter.recyclerview.AllCoursesAdapter
-import com.smartloopLearn.learning.student.adapter.recyclerview.Courses
 
 class AllCourses : AppCompatActivity() {
 

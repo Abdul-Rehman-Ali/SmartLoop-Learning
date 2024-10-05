@@ -1,4 +1,5 @@
 plugins {
+    id("kotlin-kapt") // Ensure this is included
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
@@ -76,10 +77,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.junit.jupiter)
     implementation(kotlin("script-runtime"))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.firestore)
 
-    implementation (platform(libs.firebase.bom))
-    implementation (libs.firebase.auth.ktx)
-    implementation (libs.play.services.auth)
+    // Glide dependencies
+    implementation("com.github.bumptech.glide:glide:4.15.1") // Glide
+    kapt("com.github.bumptech.glide:compiler:4.15.1") // Glide compiler
 }
 
 configurations.all {

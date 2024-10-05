@@ -21,10 +21,12 @@ class CourseFragment : Fragment() {
     private var quizModelList: MutableList<QuizModel> = mutableListOf()
     private lateinit var adapter: QuizListAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Inflate the layout for this fragment using view binding
         _binding = FragmentCourseBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,6 +35,8 @@ class CourseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDataFromFirebase()
+
+
     }
 
     override fun onDestroyView() {

@@ -130,6 +130,7 @@
         android:drawableLeft="@drawable/google"
         android:drawablePadding="8dp"
         android:padding="8dp"
+        android:visibility="gone"
         android:gravity="center_vertical|center_horizontal" />
 
     <TextView

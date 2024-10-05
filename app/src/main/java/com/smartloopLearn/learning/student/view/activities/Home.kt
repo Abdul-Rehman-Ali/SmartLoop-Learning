@@ -27,6 +27,7 @@ import com.smartloopLearn.learning.auth.CreateNewPassword
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.auth.LoginSignUp
+import com.smartloopLearn.learning.student.Utils.UserSharedPref
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var auth: FirebaseAuth
@@ -58,7 +59,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
 
         // Load user data and store in shared preferences
-        loadUserData()
+        UserSharedPref.loadUserData(this)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId){
@@ -74,33 +75,33 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         openFragment(HomeFragment())
     }
 
-    private fun loadUserData() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            firestore.collection("users").document(currentUser.uid).get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        val name = document.getString("name")
-                        val email = document.getString("email")
-                        val phone = document.getString("phone")
-
-                        // Store user data in shared preferences
-                        val sharedPreferences = getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString(sharedPrefNameKey, name)
-                        editor.putString(sharedPrefEmailKey, email)
-                        editor.putString(sharedPrefPhoneKey, phone)
-                        editor.apply()
-
-                    } else {
-                        Toast.makeText(this, "No user data found", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Failed to fetch user data: ${exception.localizedMessage}", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
+//    private fun loadUserData() {
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            firestore.collection("users").document(currentUser.uid).get()
+//                .addOnSuccessListener { document ->
+//                    if (document != null && document.exists()) {
+//                        val name = document.getString("name")
+//                        val email = document.getString("email")
+//                        val phone = document.getString("phone")
+//
+//                        // Store user data in shared preferences
+//                        val sharedPreferences = getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+//                        val editor = sharedPreferences.edit()
+//                        editor.putString(sharedPrefNameKey, name)
+//                        editor.putString(sharedPrefEmailKey, email)
+//                        editor.putString(sharedPrefPhoneKey, phone)
+//                        editor.apply()
+//
+//                    } else {
+//                        Toast.makeText(this, "No user data found", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                .addOnFailureListener { exception ->
+//                    Toast.makeText(this, "Failed to fetch user data: ${exception.localizedMessage}", Toast.LENGTH_SHORT).show()
+//                }
+//        }
+//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

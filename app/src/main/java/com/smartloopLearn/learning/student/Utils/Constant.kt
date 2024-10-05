@@ -40,16 +40,16 @@ object Constant {
         )
     }
 
-    fun getDataCourses(): ArrayList<Courses> {
-        return arrayListOf(
-            Courses(0, R.drawable.webdevelopmentslider, "Web Developement", "Jamal The Expert", 4.5),
-            Courses(1, R.drawable.pythonslider, "Python", "Mudassar the pythonist", 4.2),
-            Courses(2, R.drawable.aislider, "AI", "Ali Sher Kashif", 4.2),
-            Courses(3, R.drawable.digitalmarketingslider, "Marketing", "Ahmad Shaf", 5.0),
-            Courses(4, R.drawable.appdevelopmentslider, "App Development", "Muhammad Jamil", 3.1),
-            Courses(5, R.drawable.seoslider, "SEO", "Zafar Roy", 3.0),
-        )
-    }
+//    fun getDataCourses(): ArrayList<Courses> {
+//        return arrayListOf(
+//            Courses(0, R.drawable.webdevelopmentslider, "Web Developement", "Jamal The Expert", 4.5),
+//            Courses(1, R.drawable.pythonslider, "Python", "Mudassar the pythonist", 4.2),
+//            Courses(2, R.drawable.aislider, "AI", "Ali Sher Kashif", 4.2),
+//            Courses(3, R.drawable.digitalmarketingslider, "Marketing", "Ahmad Shaf", 5.0),
+//            Courses(4, R.drawable.appdevelopmentslider, "App Development", "Muhammad Jamil", 3.1),
+//            Courses(5, R.drawable.seoslider, "SEO", "Zafar Roy", 3.0),
+//        )
+//    }
 
     fun getDataAllCourses(): ArrayList<AllCourses> {
         return arrayListOf(

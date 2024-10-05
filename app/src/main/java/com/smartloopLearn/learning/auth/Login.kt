@@ -1,6 +1,8 @@
 package com.smartloopLearn.learning.auth
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
@@ -88,9 +90,16 @@ class Login : AppCompatActivity() {
                                     .addOnSuccessListener {
                                         Toast.makeText(
                                             this,
-                                            "Password updated in Firestore",
+                                            "Password updated",
                                             Toast.LENGTH_SHORT
                                         ).show()
+
+                                        val pref: SharedPreferences = getSharedPreferences("userLoginInfo", Context.MODE_PRIVATE)
+                                        val editor = pref.edit()
+                                        editor.putBoolean("flag", true) // Set the flag to true
+                                        editor.apply()
+
+
                                         // Redirect to the Home Activity
                                         val intent = Intent(this, Home::class.java)
                                         startActivity(intent)

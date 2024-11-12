@@ -49,13 +49,12 @@ class DashboardUserActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 categoryArrayList.clear()
                 val modelAll = ModelCategorey("01", "All", 1, "")
-                val modelMostViewed = ModelCategorey("02", "Most viewed", 1, "")
-                val modelMostDownloaded = ModelCategorey("03", "Most Downloaded", 1, "")
+//                val modelMostViewed = ModelCategorey("02", "Most viewed", 1, "")
+//                val modelMostDownloaded = ModelCategorey("03", "Most Downloaded", 1, "")
 
                 categoryArrayList.add(modelAll)
-                categoryArrayList.add(modelMostViewed)
-                categoryArrayList.add(modelMostDownloaded)
-
+//                categoryArrayList.add(modelMostViewed)
+//                categoryArrayList.add(modelMostDownloaded)
 
                 viewPagerAdapter.addFragment(
                     BooksUserFragment.newInstance(
@@ -65,21 +64,21 @@ class DashboardUserActivity : AppCompatActivity() {
                     ), modelAll.category
                 )
 
-                viewPagerAdapter.addFragment(
-                    BooksUserFragment.newInstance(
-                        "${modelMostViewed.id}",
-                        "${modelMostViewed.category}",
-                        "${modelMostViewed.uid}"
-                    ), modelMostViewed.category
-                )
+//                viewPagerAdapter.addFragment(
+//                    BooksUserFragment.newInstance(
+//                        "${modelMostViewed.id}",
+//                        "${modelMostViewed.category}",
+//                        "${modelMostViewed.uid}"
+//                    ), modelMostViewed.category
+//                )
 
-                viewPagerAdapter.addFragment(
-                    BooksUserFragment.newInstance(
-                        "${modelMostDownloaded.id}",
-                        "${modelMostDownloaded.category}",
-                        "${modelMostDownloaded.uid}"
-                    ), modelMostDownloaded.category
-                )
+//                viewPagerAdapter.addFragment(
+//                    BooksUserFragment.newInstance(
+//                        "${modelMostDownloaded.id}",
+//                        "${modelMostDownloaded.category}",
+//                        "${modelMostDownloaded.uid}"
+//                    ), modelMostDownloaded.category
+//                )
 
                 viewPagerAdapter.notifyDataSetChanged()
 

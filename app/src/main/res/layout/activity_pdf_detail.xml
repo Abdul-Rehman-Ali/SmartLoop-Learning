@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_toEndOf="@+id/pdfRL"
-                    android:text="Book Title"
+                    android:text="Job Title"
                     />
 
                 <TableLayout
@@ -251,6 +251,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_alignParentBottom="true"
         >
         
@@ -259,8 +261,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Read"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:layout_marginEnd="5dp"
             android:drawableTop="@drawable/ic_book_white"
             android:backgroundTint="@color/primary"
             android:textColor="@color/white"
@@ -271,8 +274,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Download"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:layout_marginStart="5dp"
             android:drawableTop="@drawable/ic_download_white"
             android:backgroundTint="@color/primary"
             android:textColor="@color/white"

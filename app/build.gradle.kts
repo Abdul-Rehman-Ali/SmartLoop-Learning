@@ -82,6 +82,8 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.firebase.firestore)
 
+    implementation (libs.exoplayer)
+
     // Glide dependencies
     implementation("com.github.bumptech.glide:glide:4.15.1") // Glide
     kapt("com.github.bumptech.glide:compiler:4.15.1") // Glide compiler

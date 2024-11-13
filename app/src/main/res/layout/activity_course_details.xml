@@ -8,16 +8,26 @@
     tools:context=".student.view.activities.coursedetails.CourseDetailsActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/webdevelopmentslider"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/webdevelopmentslider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -26,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/playerView">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

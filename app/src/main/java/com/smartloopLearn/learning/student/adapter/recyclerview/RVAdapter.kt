@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.admin.DashboardUserActivity
-import com.smartloopLearn.learning.student.model.Courses
 import com.smartloopLearn.learning.student.model.RVModel
 
 class RVAdapter(private val list: ArrayList<RVModel>, private val context: Context) : RecyclerView.Adapter<OurVH>() {

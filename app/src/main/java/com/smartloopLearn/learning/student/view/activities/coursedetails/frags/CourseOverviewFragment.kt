@@ -5,8 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
+import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.FragmentCourseOverviewBinding
+import com.smartloopLearn.learning.student.adapter.recyclerview.SkillsAdapter
 import com.smartloopLearn.learning.student.model.Courses
 
 
@@ -16,6 +22,7 @@ class CourseOverviewFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var courseData: Courses
+    private lateinit var skillsAdapter: SkillsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +48,17 @@ class CourseOverviewFragment : Fragment() {
         binding.tvDiscount.text = courseData.Discount
         binding.tvCertificate.text = courseData.Certificate
         binding.tvCourseLessons.text = courseData.CourseLessons
+
+        // Initialize the adapter with the skills list
+        val skillsList = courseData.Skills ?: emptyList()
+        skillsAdapter = SkillsAdapter(skillsList)
+
+        // Access the RecyclerView and set it up
+        val skillsRecyclerView = view.findViewById<RecyclerView>(R.id.skillsRecyclerView)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        skillsRecyclerView.layoutManager = gridLayoutManager
+        skillsRecyclerView.adapter = skillsAdapter
+
 
 
         // Use Glide to load the image URL into an ImageView

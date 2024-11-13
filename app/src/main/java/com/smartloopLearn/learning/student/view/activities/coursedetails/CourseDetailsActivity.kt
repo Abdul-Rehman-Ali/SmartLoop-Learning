@@ -60,7 +60,6 @@ class CourseDetailsActivity : AppCompatActivity() {
         // Fetch course details from Firestore
         courseRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                // Extract course details from Firestore document
                 val courseTitle = document.getString("CourseTitle") ?: ""
                 val teacherName = document.getString("TeacherName") ?: ""
                 val coursePrice = document.getString("CoursePrice") ?: ""
@@ -70,30 +69,50 @@ class CourseDetailsActivity : AppCompatActivity() {
                 val courseDuration = document.getString("CourseDuration") ?: ""
                 val discount = document.getString("Discount") ?: ""
                 val certificate = document.getString("Certificate") ?: ""
-                val courseLesson = document.getString("CourseLessons") ?: "" // Assuming one lesson
+                val courseLesson = document.getString("CourseLessons") ?: ""
 
-                // Create an instance of the Courses data class
-                courseData = Courses(
-                    CourseId = courseId,
-                    CourseTitle = courseTitle,
-                    TeacherName = teacherName,
-                    ImageURL = imageUrl,
-                    Rating = rating,
-                    CoursePrice = coursePrice,
-                    CourseDescription = courseDescription,
-                    CourseDuration = courseDuration,
-                    Discount = discount,
-                    Certificate = certificate,
-                    CourseLessons = courseLesson
-                )
+                // Initialize an empty list to store the skills
+                val skillsList = mutableListOf<String>()
 
-                // Move to CourseOverviewFragment
-                moveFrag(CourseOverviewFragment())
+                // Fetch the Skills sub-collection
+                courseRef.collection("Skills").get().addOnSuccessListener { skillsSnapshot ->
+                    for (skillDoc in skillsSnapshot) {
+                        // Get all fields in the skill document as a map
+                        val skillFields = skillDoc.data
+
+                        // Add each field's value to skillsList if it's a string (assuming skills are stored as strings)
+                        skillFields.forEach { (_, value) ->
+                            if (value is String) {
+                                skillsList.add(value)
+                            }
+                        }
+                    }
+
+                    // Create an instance of the Courses data class
+                    courseData = Courses(
+                        CourseId = courseId,
+                        CourseTitle = courseTitle,
+                        TeacherName = teacherName,
+                        ImageURL = imageUrl,
+                        Rating = rating,
+                        CoursePrice = coursePrice,
+                        CourseDescription = courseDescription,
+                        CourseDuration = courseDuration,
+                        Discount = discount,
+                        Certificate = certificate,
+                        CourseLessons = courseLesson,
+                        Skills = skillsList
+                    )
+
+                    // Move to CourseOverviewFragment
+                    moveFrag(CourseOverviewFragment())
+                }
             }
         }.addOnFailureListener {
             // Handle the error (optional)
         }
     }
+
 
 
     // Move to another fragment

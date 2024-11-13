@@ -33,7 +33,8 @@ data class Courses(
     val CourseDuration: String = "",
     val Discount: String = "",
     val Certificate: String = "",
-    val CourseLessons: String = ""
+    val CourseLessons: String = "",
+    val Skills: List<String> = emptyList()
 ) : Serializable  // This will allow passing the object in a Bundle
 
 

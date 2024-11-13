@@ -3,6 +3,6 @@
     <dimen name="nav_header_padding">16dp</dimen>
     <dimen name="nav_header_height">170dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
-
+    <dimen name="player_default_height">200dp</dimen>
 
 </resources>

@@ -1,13 +1,21 @@
 package com.smartloopLearn.learning.student.view.activities.coursedetails
 
+import android.content.pm.ActivityInfo
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
 import com.smartloopLearn.learning.student.model.Courses
@@ -18,33 +26,41 @@ import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.C
 class CourseDetailsActivity : AppCompatActivity() {
     private val binding by lazy { ActivityCourseDetailsBinding.inflate(layoutInflater) }
     private var courseData: Courses? = null
+    private var courseURL: String = ""
+    private var player: ExoPlayer? = null
+    private lateinit var playerView: PlayerView
+    private lateinit var fullscreenButton: ImageView
+    private var isFullscreen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // Set up for edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Get the course ID from the intent
+        playerView = binding.courseVideo
+        fullscreenButton = binding.courseVideo.findViewById(R.id.fullscreen_button)
+
+        fullscreenButton.setOnClickListener {
+            toggleFullscreen()
+        }
+
         val courseId = intent.getStringExtra("CourseId") ?: return
         fetchCourseDetails(courseId)
 
-        // Default fragment
         moveFrag(CourseOverviewFragment())
 
-        // Set up tab listener to switch between fragments
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> moveFrag(CourseOverviewFragment())  // Overview
-                    1 -> moveFrag(CourseLessonsFragment())  // Lessons
-                    2 -> moveFrag(CourseReviewsFragment())  // Reviews
+                    0 -> moveFrag(CourseOverviewFragment())
+                    1 -> moveFrag(CourseLessonsFragment())
+                    2 -> moveFrag(CourseReviewsFragment())
                 }
             }
 
@@ -57,7 +73,6 @@ class CourseDetailsActivity : AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         val courseRef = db.collection("Courses").document(courseId)
 
-        // Fetch course details from Firestore
         courseRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
                 val courseTitle = document.getString("CourseTitle") ?: ""
@@ -70,25 +85,17 @@ class CourseDetailsActivity : AppCompatActivity() {
                 val discount = document.getString("Discount") ?: ""
                 val certificate = document.getString("Certificate") ?: ""
                 val courseLesson = document.getString("CourseLessons") ?: ""
+                courseURL = document.getString("CourseURL") ?: ""
 
-                // Initialize an empty list to store the skills
                 val skillsList = mutableListOf<String>()
-
-                // Fetch the Skills sub-collection
                 courseRef.collection("Skills").get().addOnSuccessListener { skillsSnapshot ->
                     for (skillDoc in skillsSnapshot) {
-                        // Get all fields in the skill document as a map
                         val skillFields = skillDoc.data
-
-                        // Add each field's value to skillsList if it's a string (assuming skills are stored as strings)
                         skillFields.forEach { (_, value) ->
-                            if (value is String) {
-                                skillsList.add(value)
-                            }
+                            if (value is String) skillsList.add(value)
                         }
                     }
 
-                    // Create an instance of the Courses data class
                     courseData = Courses(
                         CourseId = courseId,
                         CourseTitle = courseTitle,
@@ -104,20 +111,53 @@ class CourseDetailsActivity : AppCompatActivity() {
                         Skills = skillsList
                     )
 
-                    // Move to CourseOverviewFragment
+                    initializePlayer()
                     moveFrag(CourseOverviewFragment())
                 }
             }
-        }.addOnFailureListener {
-            // Handle the error (optional)
         }
     }
 
+    private fun initializePlayer() {
+        if (courseURL.isNotEmpty()) {
+            player = ExoPlayer.Builder(this).build()
+            playerView.player = player
+            val mediaItem = MediaItem.fromUri(Uri.parse(courseURL))
+            player?.setMediaItem(mediaItem)
+            player?.prepare()
+            player?.playWhenReady = true
+        }
+    }
 
+    private fun toggleFullscreen() {
+        if (isFullscreen) {
+            supportActionBar?.show()
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            playerView.layoutParams.height = resources.getDimensionPixelSize(R.dimen.player_default_height)
+            isFullscreen = false
+            fullscreenButton.setImageResource(R.drawable.baseline_fullscreen_24)
+        } else {
+            supportActionBar?.hide()
+            window.decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    )
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            playerView.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+            isFullscreen = true
+            fullscreenButton.setImageResource(R.drawable.baseline_fullscreen_exit_24)
+        }
+    }
 
-    // Move to another fragment
+    override fun onStop() {
+        super.onStop()
+        player?.release()
+        player = null
+    }
+
     private fun moveFrag(frag: Fragment) {
-        // If the fragment is an instance of CourseOverviewFragment, pass the course data
         if (frag is CourseOverviewFragment) {
             frag.arguments = Bundle().apply {
                 putSerializable("course_data", courseData)

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvCourseTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -24,16 +24,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvTeacherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Teacher Name"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintStart_toStartOf="@+id/tvCourseTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseTitle" />
 
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/CourseRating"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,8 +41,8 @@
             android:paddingBottom="5dp"
             android:rating="4.8"
             android:stepSize="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="@+id/tvTeacherName"
+            app:layout_constraintTop_toBottomOf="@+id/tvTeacherName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,73 +51,90 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginEnd="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
-            app:layout_constraintEnd_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="@+id/textView9" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvCoursePrice"
+            app:layout_constraintEnd_toStartOf="@+id/tvCoursePrice"
+            app:layout_constraintTop_toTopOf="@+id/tvCoursePrice" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/tvCoursePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="2400"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintTop_toTopOf="@+id/tvCourseTitle" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvCourseDescription"
             android:layout_width="match_parent"
-            android:layout_height="173dp"
-            android:background="@color/cardview_dark_background"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:text="TextBox"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+            app:layout_constraintTop_toBottomOf="@+id/CourseRating" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_video_library_24"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCourseLessons"
+            app:layout_constraintEnd_toStartOf="@+id/tvCourseLessons"
+            app:layout_constraintTop_toTopOf="@+id/tvCourseLessons"  />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tvCourseLessons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:layout_marginTop="28dp"
             android:text="Course Lessons"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvCertificate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="76dp"
             android:text="Certificate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tvDiscount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
             android:text="Discount"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/tvCertificate"
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvCourseDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
             android:text="Course Duration"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/tvCourseLessons"
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/baseline_schedule_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCourseDuration"
+            app:layout_constraintEnd_toStartOf="@+id/tvCourseDuration"
+            app:layout_constraintTop_toTopOf="@+id/tvCourseDuration" />
 
         <TextView
             android:id="@+id/textView5"
@@ -129,7 +146,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseDuration" />
 
         <!-- Add id to RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -145,20 +162,20 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_pdf_gray"
+            android:src="@drawable/baseline_bookmark_added_24"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="@+id/textView6" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvCertificate"
+            app:layout_constraintEnd_toStartOf="@+id/tvCertificate"
+            app:layout_constraintTop_toTopOf="@+id/tvCertificate" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_pdf_gray"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
-            app:layout_constraintEnd_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/textView7"
+            android:src="@drawable/baseline_discount_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDiscount"
+            app:layout_constraintEnd_toStartOf="@+id/tvDiscount"
+            app:layout_constraintTop_toTopOf="@+id/tvDiscount"
             app:layout_constraintVertical_bias="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ class CoursesAdapter(private val list: ArrayList<Courses>, private val context: 
         // Handle click event for each course item
         holder.itemView.setOnClickListener {
             val intent = Intent(context, CourseDetailsActivity::class.java)
-            intent.putExtra("COURSE_ID", item.CourseId) // Pass course ID or any data if needed
+            intent.putExtra("CourseId", item.CourseId) // Pass course ID or any data if needed
             context.startActivity(intent)
         }
     }

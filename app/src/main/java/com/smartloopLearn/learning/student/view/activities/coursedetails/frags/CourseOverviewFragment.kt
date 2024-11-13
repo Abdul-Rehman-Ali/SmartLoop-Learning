@@ -1,60 +1,56 @@
 package com.smartloopLearn.learning.student.view.activities.coursedetails.frags
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.smartloopLearn.learning.R
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.smartloopLearn.learning.databinding.FragmentCourseOverviewBinding
+import com.smartloopLearn.learning.student.model.Courses
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CourseOverviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CourseOverviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentCourseOverviewBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var courseData: Courses
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_overview, container, false)
+        _binding = FragmentCourseOverviewBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CourseOverviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CourseOverviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Retrieve data passed from CourseDetailsActivity
+        courseData = arguments?.getSerializable("course_data") as? Courses ?: return
+
+        // Populate the UI with the course data
+        binding.tvCourseTitle.text = courseData.CourseTitle
+        binding.tvTeacherName.text = courseData.TeacherName
+        binding.CourseRating.rating = courseData.Rating.toFloatOrNull() ?: 0f
+        binding.tvCoursePrice.text = "${courseData.CoursePrice}"
+        binding.tvCourseDescription.text = courseData.CourseDescription
+        binding.tvCourseDuration.text = courseData.CourseDuration
+        binding.tvDiscount.text = courseData.Discount
+        binding.tvCertificate.text = courseData.Certificate
+        binding.tvCourseLessons.text = courseData.CourseLessons
+
+
+        // Use Glide to load the image URL into an ImageView
+//        Glide.with(this)
+//            .load(courseData.ImageURL)
+//            .into(binding.courseImageView)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

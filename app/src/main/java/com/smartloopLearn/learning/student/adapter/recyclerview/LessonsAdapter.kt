@@ -8,43 +8,38 @@ import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.RvItemCourseLessonsBinding
 import com.smartloopLearn.learning.student.model.CourseLessons
 
-class LessonsAdapter(private val lessons: List<CourseLessons>) :
-    RecyclerView.Adapter<LessonsAdapter.LessonViewHolder>() {
+interface OnVideoClickListener {
+    fun onVideoClick(videoURL: String)
+}
 
-    // ViewHolder using View Binding
+class LessonsAdapter(
+    private val lessons: List<CourseLessons>,
+    private val videoClickListener: OnVideoClickListener // Pass listener in constructor
+) : RecyclerView.Adapter<LessonsAdapter.LessonViewHolder>() {
+
     inner class LessonViewHolder(private val binding: RvItemCourseLessonsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(lesson: CourseLessons) {
-            // Bind the lesson title
             binding.lessonTitle.text = lesson.title
-
-            // Bind the lesson description
             binding.lessonDescription.text = lesson.description
+            binding.expandableContent.visibility = if (lesson.isExpanded) View.VISIBLE else View.GONE
+            binding.arrowIcon.setImageResource(if (lesson.isExpanded) R.drawable.arrow_up else R.drawable.arrow_down)
 
-            // Handle expandable content visibility
-            val isExpanded = lesson.isExpanded
-            binding.expandableContent.visibility = if (isExpanded) View.VISIBLE else View.GONE
-            binding.arrowIcon.setImageResource(if (isExpanded) R.drawable.arrow_up else R.drawable.arrow_down)
-
-            // Toggle expansion on click
             binding.parentLayout.setOnClickListener {
                 lesson.isExpanded = !lesson.isExpanded
                 notifyItemChanged(adapterPosition)
             }
 
-            // Store videoURL in playVideo ImageView using setTag
-            binding.playVideo.tag = lesson.videoURL
+            // Handle play video click
+            binding.playVideo.setOnClickListener {
+                videoClickListener.onVideoClick(lesson.videoURL)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
-        // Inflate the layout using View Binding
-        val binding = RvItemCourseLessonsBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding = RvItemCourseLessonsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LessonViewHolder(binding)
     }
 

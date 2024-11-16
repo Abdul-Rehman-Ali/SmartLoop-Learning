@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.tabs.TabLayout
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
+import com.smartloopLearn.learning.student.adapter.recyclerview.OnVideoClickListener
 import com.smartloopLearn.learning.student.model.CourseReview
 import com.smartloopLearn.learning.student.model.Courses
 import com.smartloopLearn.learning.student.model.CourseLessons
@@ -25,7 +26,7 @@ import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.C
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseOverviewFragment
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseReviewsFragment
 
-class CourseDetailsActivity : AppCompatActivity() {
+class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
     private val binding by lazy { ActivityCourseDetailsBinding.inflate(layoutInflater) }
     private var courseData: Courses? = null
     private var courseURL: String = ""
@@ -33,8 +34,8 @@ class CourseDetailsActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var fullscreenButton: ImageView
     private var isFullscreen = false
-    private var reviews = mutableListOf<CourseReview>() // Store reviews here
-    private var lessons = mutableListOf<CourseLessons>() // Store lessons here
+    private var reviews = mutableListOf<CourseReview>()
+    private var lessons = mutableListOf<CourseLessons>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,13 +67,13 @@ class CourseDetailsActivity : AppCompatActivity() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> moveFrag(CourseOverviewFragment()) // Show CourseOverviewFragment
-                    1 -> moveFrag(CourseLessonsFragment()) // Show CourseLessonsFragment
+                    0 -> moveFrag(CourseOverviewFragment())
+                    1 -> moveFrag(CourseLessonsFragment())
                     2 -> {
                         if (reviews.isEmpty()) {
-                            fetchCourseReviews(courseId) // Fetch reviews if not already fetched
+                            fetchCourseReviews(courseId)
                         } else {
-                            moveFrag(CourseReviewsFragment()) // Show CourseReviewsFragment with reviews
+                            moveFrag(CourseReviewsFragment())
                         }
                     }
                 }
@@ -111,7 +112,6 @@ class CourseDetailsActivity : AppCompatActivity() {
                         }
                     }
 
-                    // Fetch lessons after course details are fetched
                     fetchLessons(courseRef.id)
 
                     courseData = Courses(
@@ -129,13 +129,12 @@ class CourseDetailsActivity : AppCompatActivity() {
                         Skills = skillsList
                     )
 
-                    initializePlayer() // Initialize video player
+                    initializePlayer()
                 }
             }
         }
     }
 
-    // Fetch lessons from Firestore
     private fun fetchLessons(courseId: String) {
         val db = FirebaseFirestore.getInstance()
         val lessonsRef = db.collection("Courses").document(courseId).collection("Lessons")
@@ -147,19 +146,17 @@ class CourseDetailsActivity : AppCompatActivity() {
                 val videoURL = lessonDoc.getString("videoURL") ?: ""
                 val description = lessonDoc.getString("description") ?: ""
 
-                // Use the document ID (in order) and map to CourseLessons data class
                 val lesson = CourseLessons(
                     title = title,
                     videoURL = videoURL,
                     description = description,
-                    isExpanded = false // Default value for expansion
+                    isExpanded = false
                 )
 
                 lessonsList.add(lesson)
             }
-            lessons = lessonsList // Store lessons in the class variable
+            lessons = lessonsList
 
-            // Fetch reviews only after lessons are loaded
             fetchCourseReviews(courseId)
         }
     }
@@ -175,9 +172,8 @@ class CourseDetailsActivity : AppCompatActivity() {
                 val review = reviewDoc.toObject(CourseReview::class.java)
                 reviewsList.add(review)
             }
-            reviews = reviewsList // Store reviews in the class variable
+            reviews = reviewsList
 
-            // Now that course details, lessons, and reviews are all fetched, move to the CourseOverviewFragment
             moveFrag(CourseOverviewFragment())
         }
     }
@@ -194,7 +190,17 @@ class CourseDetailsActivity : AppCompatActivity() {
         }
     }
 
-    // Toggle fullscreen mode
+    // Handle video click from CourseLessonsFragment
+    override fun onVideoClick(videoURL: String) {
+        // Update the video player with the new video URL
+        if (videoURL.isNotEmpty()) {
+            val mediaItem = MediaItem.fromUri(Uri.parse(videoURL))
+            player?.setMediaItem(mediaItem)
+            player?.prepare()
+            player?.playWhenReady = true
+        }
+    }
+
     private fun toggleFullscreen() {
         if (isFullscreen) {
             supportActionBar?.show()
@@ -217,7 +223,6 @@ class CourseDetailsActivity : AppCompatActivity() {
         }
     }
 
-    // Release player when the activity stops
     override fun onStop() {
         super.onStop()
         player?.release()
@@ -232,11 +237,11 @@ class CourseDetailsActivity : AppCompatActivity() {
             }
             is CourseLessonsFragment -> frag.arguments = Bundle().apply {
                 putSerializable("course_data", courseData)
-                putParcelableArrayList("lessons", ArrayList(lessons)) // Pass lessons to the CourseLessonsFragment
+                putParcelableArrayList("lessons", ArrayList(lessons))
             }
             is CourseReviewsFragment -> frag.arguments = Bundle().apply {
                 putSerializable("course_data", courseData)
-                putParcelableArrayList("reviews", ArrayList(reviews)) // Pass reviews to the CourseReviewsFragment
+                putParcelableArrayList("reviews", ArrayList(reviews))
             }
         }
         supportFragmentManager.beginTransaction().apply {

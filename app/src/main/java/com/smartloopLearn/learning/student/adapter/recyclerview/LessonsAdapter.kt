@@ -32,6 +32,9 @@ class LessonsAdapter(private val lessons: List<CourseLessons>) :
                 lesson.isExpanded = !lesson.isExpanded
                 notifyItemChanged(adapterPosition)
             }
+
+            // Store videoURL in playVideo ImageView using setTag
+            binding.playVideo.tag = lesson.videoURL
         }
     }
 

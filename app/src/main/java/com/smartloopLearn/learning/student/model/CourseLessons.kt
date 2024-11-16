@@ -14,15 +14,17 @@ data class CourseLessons(
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readByte() != 0.toByte()
-    ) {
-    }
+    )
 
     override fun describeContents(): Int {
-        TODO("Not yet implemented")
+        return 0 // No special file descriptors
     }
 
-    override fun writeToParcel(p0: Parcel, p1: Int) {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(videoURL)
+        parcel.writeString(description)
+        parcel.writeByte(if (isExpanded) 1 else 0)
     }
 
     companion object CREATOR : Parcelable.Creator<CourseLessons> {
@@ -35,4 +37,3 @@ data class CourseLessons(
         }
     }
 }
-

@@ -31,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:layout_marginStart="5dp"
             android:gravity="start">
 
             <!-- Course Name -->
@@ -94,6 +95,7 @@
                     android:id="@+id/rbAllCourseRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
                     android:numStars="5"
                     android:stepSize="0.5"
                     android:rating="4.8"
@@ -102,12 +104,12 @@
                     android:scaleY="1.5" />
 
                 <!-- Favorite Icon -->
-                <ImageView
-                    android:id="@+id/ivFavoriteIcon"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginStart="50dp"
-                    android:src="@drawable/baseline_favorite_border_24" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivFavoriteIcon"-->
+<!--                    android:layout_width="28dp"-->
+<!--                    android:layout_height="28dp"-->
+<!--                    android:layout_marginStart="50dp"-->
+<!--                    android:src="@drawable/baseline_favorite_border_24" />-->
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

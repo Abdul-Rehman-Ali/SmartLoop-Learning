@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.admin.DashboardUserActivity
 import com.smartloopLearn.learning.student.model.Courses
+import com.smartloopLearn.learning.student.view.activities.coursedetails.CourseDetailsActivity
 
 
 class AllCoursesAdapter(private val list: ArrayList<Courses>, private val context: Context) : RecyclerView.Adapter<AllCoursesViewHolder>() {
@@ -45,8 +46,8 @@ class AllCoursesAdapter(private val list: ArrayList<Courses>, private val contex
 
         // Handle click event for the first card view
         holder.itemView.setOnClickListener {
-            // Check if it's the first item
-            val intent = Intent(context, DashboardUserActivity::class.java)
+            val intent = Intent(context, CourseDetailsActivity::class.java)
+            intent.putExtra("CourseId", item.CourseId) // Pass course ID or any data if needed
             context.startActivity(intent)
         }
     }

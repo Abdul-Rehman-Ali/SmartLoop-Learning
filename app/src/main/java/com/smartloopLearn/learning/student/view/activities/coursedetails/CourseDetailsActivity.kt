@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
+import com.smartloopLearn.learning.student.model.CourseReview
 import com.smartloopLearn.learning.student.model.Courses
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseLessonsFragment
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseOverviewFragment
@@ -31,6 +32,7 @@ class CourseDetailsActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var fullscreenButton: ImageView
     private var isFullscreen = false
+    private var reviews = mutableListOf<CourseReview>() // Store reviews here
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,14 +55,22 @@ class CourseDetailsActivity : AppCompatActivity() {
         val courseId = intent.getStringExtra("CourseId") ?: return
         fetchCourseDetails(courseId)
 
-        moveFrag(CourseOverviewFragment())
+        moveFrag(CourseOverviewFragment()) // Show CourseOverviewFragment initially
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> moveFrag(CourseOverviewFragment())
-                    1 -> moveFrag(CourseLessonsFragment())
-                    2 -> moveFrag(CourseReviewsFragment())
+                    0 -> moveFrag(CourseOverviewFragment()) // Show overview fragment
+                    1 -> moveFrag(CourseLessonsFragment()) // Show lessons fragment
+                    2 -> {
+                        if (reviews.isEmpty()) {
+                            // Fetch reviews if not already fetched
+                            fetchCourseReviews(courseId)
+                        } else {
+                            // Pass the reviews directly to the fragment
+                            moveFrag(CourseReviewsFragment(), reviews)
+                        }
+                    }
                 }
             }
 
@@ -112,9 +122,25 @@ class CourseDetailsActivity : AppCompatActivity() {
                     )
 
                     initializePlayer()
-                    moveFrag(CourseOverviewFragment())
+                    moveFrag(CourseOverviewFragment()) // Show CourseOverviewFragment
                 }
             }
+        }
+    }
+
+    private fun fetchCourseReviews(courseId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val reviewsRef = db.collection("Courses").document(courseId).collection("Reviews")
+
+        reviewsRef.get().addOnSuccessListener { reviewsSnapshot ->
+            val reviewsList = mutableListOf<CourseReview>()
+            for (reviewDoc in reviewsSnapshot) {
+                val review = reviewDoc.toObject(CourseReview::class.java)
+                reviewsList.add(review)
+            }
+            reviews = reviewsList // Store reviews in the class variable
+            // Now that reviews are fetched, switch to the reviews fragment
+            moveFrag(CourseReviewsFragment(), reviews)
         }
     }
 
@@ -157,10 +183,19 @@ class CourseDetailsActivity : AppCompatActivity() {
         player = null
     }
 
-    private fun moveFrag(frag: Fragment) {
+    // Updated moveFrag method to accept reviews list
+    private fun moveFrag(frag: Fragment, reviews: List<CourseReview>? = null) {
         if (frag is CourseOverviewFragment) {
             frag.arguments = Bundle().apply {
                 putSerializable("course_data", courseData)
+            }
+        } else if (frag is CourseReviewsFragment) {
+            frag.arguments = Bundle().apply {
+                putSerializable("course_data", courseData)
+                // Pass reviews here if it's not null
+                reviews?.let {
+                    putParcelableArrayList("reviews", ArrayList(it))
+                }
             }
         }
         supportFragmentManager.beginTransaction().apply {

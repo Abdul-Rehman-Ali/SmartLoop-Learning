@@ -1,19 +1,32 @@
 package com.smartloopLearn.learning.student.view.activities.coursedetails.frags
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.smartloopLearn.learning.R
+import com.smartloopLearn.learning.databinding.FragmentCourseReviewsBinding
+import com.smartloopLearn.learning.student.adapter.recyclerview.CourseReviewsAdapter
+import com.smartloopLearn.learning.student.model.CourseReview
 
 class CourseReviewsFragment : Fragment(R.layout.fragment_course_reviews) {
+    private lateinit var binding: FragmentCourseReviewsBinding
+    private lateinit var adapter: CourseReviewsAdapter
+    private var reviews: List<CourseReview> = emptyList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_reviews, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentCourseReviewsBinding.bind(view)
+
+        // Retrieve reviews from arguments passed from the activity
+        arguments?.let {
+            reviews = it.getParcelableArrayList("reviews") ?: emptyList()
+        }
+
+        // Set up the RecyclerView
+        adapter = CourseReviewsAdapter(reviews)
+        binding.recyclerViewReviews.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewReviews.adapter = adapter
     }
 }
+

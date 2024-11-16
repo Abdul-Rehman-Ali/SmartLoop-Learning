@@ -3,16 +3,17 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id("kotlin-parcelize") // Ensure kotlin-parcelize is applied here
 }
 
 android {
     namespace = "com.smartloopLearn.learning"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.smartloopLearn.learning"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 4
         versionName = "4.0"
 
@@ -28,16 +29,20 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         viewBinding = true
     }
+
     packagingOptions {
         resources {
             excludes += setOf(
@@ -72,6 +77,8 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database)
+    implementation(libs.places)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -82,7 +89,10 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.firebase.firestore)
 
-    implementation (libs.exoplayer)
+    implementation(libs.exoplayer)
+
+    // Remove this line as it is unnecessary
+    // implementation(libs.kotlinx.parcelize.runtime)
 
     // Glide dependencies
     implementation("com.github.bumptech.glide:glide:4.15.1") // Glide

@@ -5,15 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.smartloopLearn.learning.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.smartloopLearn.learning.databinding.FragmentCourseLessonsBinding
+import com.smartloopLearn.learning.student.adapter.recyclerview.LessonsAdapter
+import com.smartloopLearn.learning.student.model.CourseLessons
 
-class CourseLessonsFragment : Fragment(R.layout.fragment_course_lessons) {
+class CourseLessonsFragment : Fragment() {
+    private lateinit var binding: FragmentCourseLessonsBinding
+    private var lessons: List<CourseLessons> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_lessons, container, false)
+        binding = FragmentCourseLessonsBinding.inflate(inflater, container, false)
+
+        // Retrieve lessons data passed from the activity
+        arguments?.let {
+            lessons = it.getParcelableArrayList("lessons") ?: mutableListOf()
+        }
+
+        // Set up RecyclerView
+        binding.recyclerViewLessons.layoutManager = LinearLayoutManager(context)
+        val lessonsAdapter = LessonsAdapter(lessons)
+        binding.recyclerViewLessons.adapter = lessonsAdapter
+
+        return binding.root
     }
 }

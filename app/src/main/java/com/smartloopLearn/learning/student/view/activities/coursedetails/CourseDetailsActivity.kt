@@ -1,5 +1,6 @@
 package com.smartloopLearn.learning.student.view.activities.coursedetails
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,14 +17,15 @@ import androidx.fragment.app.Fragment
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
 import com.smartloopLearn.learning.student.adapter.recyclerview.OnVideoClickListener
+import com.smartloopLearn.learning.student.model.CourseLessons
 import com.smartloopLearn.learning.student.model.CourseReview
 import com.smartloopLearn.learning.student.model.Courses
-import com.smartloopLearn.learning.student.model.CourseLessons
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseLessonsFragment
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseOverviewFragment
 import com.smartloopLearn.learning.student.view.activities.coursedetails.frags.CourseReviewsFragment
@@ -37,6 +40,11 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
     private var isFullscreen = false
     private var reviews = mutableListOf<CourseReview>()
     private var lessons = mutableListOf<CourseLessons>()
+
+    private val sharedPrefFile = "smartloopLearnPrefs"
+    private val sharedPrefNameKey = "user_name"
+    private val sharedPrefEmailKey = "user_email"
+    private val sharedPrefPhoneKey = "user_phone"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,9 +95,13 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+
+        // Enroll button click listener
+        binding.btnEnroll.setOnClickListener {
+            enrollStudent(courseId, courseData?.CourseTitle ?: "Unknown Course Name")
+        }
     }
 
-    // Fetch course details from Firestore
     private fun fetchCourseDetails(courseId: String) {
         val db = FirebaseFirestore.getInstance()
         val courseRef = db.collection("Courses").document(courseId)
@@ -133,7 +145,6 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
                         CourseLessons = courseLesson,
                         Skills = skillsList
                     )
-
                     initializePlayer()
                 }
             }
@@ -166,7 +177,6 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
         }
     }
 
-    // Fetch course reviews from Firestore
     private fun fetchCourseReviews(courseId: String) {
         val db = FirebaseFirestore.getInstance()
         val reviewsRef = db.collection("Courses").document(courseId).collection("Reviews")
@@ -183,7 +193,6 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
         }
     }
 
-    // Initialize video player
     private fun initializePlayer() {
         if (courseURL.isNotEmpty()) {
             player = ExoPlayer.Builder(this).build()
@@ -195,9 +204,7 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
         }
     }
 
-    // Handle video click from CourseLessonsFragment
     override fun onVideoClick(videoURL: String) {
-        // Update the video player with the new video URL
         if (videoURL.isNotEmpty()) {
             val mediaItem = MediaItem.fromUri(Uri.parse(videoURL))
             player?.setMediaItem(mediaItem)
@@ -228,13 +235,98 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
         }
     }
 
+
+    private fun enrollStudent(courseId: String, courseName: String) {
+        // Retrieve student details from SharedPreferences
+        val sharedPreferences = getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+
+        // Fetch data using the correct SharedPreferences keys
+        val studentName = sharedPreferences.getString(sharedPrefNameKey, "Unknown Name") ?: "Unknown Name"
+        val studentEmail = sharedPreferences.getString(sharedPrefEmailKey, "Unknown Email") ?: "Unknown Email"
+        val studentPhone = sharedPreferences.getString(sharedPrefPhoneKey, "Unknown Phone") ?: "Unknown Phone"
+
+        // Ensure valid student details are fetched
+        if (studentName == "Unknown Name" || studentEmail == "Unknown Email" || studentPhone == "Unknown Phone") {
+            Toast.makeText(this, "Student data is missing. Please log in again.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val studentId = FirebaseAuth.getInstance().currentUser?.uid ?: "Unknown ID"
+        val enrollmentDate = System.currentTimeMillis()  // Timestamp for enrollment
+        val enrollmentStatus = "Enrolled"  // Enrollment status
+
+        if (studentId == "Unknown ID") {
+            Toast.makeText(this, "Failed to retrieve student ID!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val db = FirebaseFirestore.getInstance()
+        val enrollmentRef = db.collection("Enrollments").document(studentId)
+
+        enrollmentRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                // Student exists, update their course list with additional details
+                val courses = document.get("courses") as? MutableList<HashMap<String, Any>> ?: mutableListOf()
+
+                // Create course map with additional student details
+                val courseMap = hashMapOf<String, Any>(
+                    "courseId" to courseId,
+                    "courseName" to courseName,
+                    "studentName" to studentName,
+                    "studentEmail" to studentEmail,
+                    "studentPhone" to studentPhone,
+                    "enrollmentDate" to enrollmentDate,
+                    "status" to enrollmentStatus
+                )
+
+                // Check if the student is already enrolled in the course
+                if (courses.none { it["courseId"] == courseId }) {
+                    courses.add(courseMap)
+                    enrollmentRef.update("courses", courses).addOnSuccessListener {
+                        Toast.makeText(this, "Enrolled in $courseName successfully!", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Failed to enroll: ${it.message}", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Already enrolled in $courseName!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                // New student, create a new document with course and student details
+                val coursesList = listOf(
+                    hashMapOf<String, Any>(
+                        "courseId" to courseId,
+                        "courseName" to courseName,
+                        "studentName" to studentName,
+                        "studentEmail" to studentEmail,
+                        "studentPhone" to studentPhone,
+                        "enrollmentDate" to enrollmentDate,
+                        "status" to enrollmentStatus
+                    )
+                )
+
+                val enrollmentData = hashMapOf(
+                    "studentId" to studentId,
+                    "courses" to coursesList
+                )
+
+                enrollmentRef.set(enrollmentData).addOnSuccessListener {
+                    Toast.makeText(this, "Enrolled in $courseName successfully!", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Failed to enroll: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to check enrollment: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     override fun onStop() {
         super.onStop()
         player?.release()
         player = null
     }
 
-    // Move to the appropriate fragment
     private fun moveFrag(frag: Fragment) {
         when (frag) {
             is CourseOverviewFragment -> frag.arguments = Bundle().apply {

@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.PlayerView
@@ -23,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
 import com.smartloopLearn.learning.student.adapter.recyclerview.OnVideoClickListener
+import com.smartloopLearn.learning.student.adapter.recyclerview.SkillsAdapter
 import com.smartloopLearn.learning.student.model.CourseLessons
 import com.smartloopLearn.learning.student.model.CourseReview
 import com.smartloopLearn.learning.student.model.Courses
@@ -45,6 +48,7 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
     private val sharedPrefNameKey = "user_name"
     private val sharedPrefEmailKey = "user_email"
     private val sharedPrefPhoneKey = "user_phone"
+    private var isEnrolled = false  // Flag to check if the user is enrolled
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +85,14 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> moveFrag(CourseOverviewFragment())
-                    1 -> moveFrag(CourseLessonsFragment())
+                    1 -> {
+                        if (isEnrolled) {
+                            moveFrag(CourseLessonsFragment())
+                        } else {
+                            Toast.makeText(this@CourseDetailsActivity, "You need to enroll first to access lessons and refresh page", Toast.LENGTH_SHORT).show()
+                            binding.tabLayout.getTabAt(1)?.select() // Keep the Lessons tab selected but show message
+                        }
+                    }
                     2 -> {
                         if (reviews.isEmpty()) {
                             fetchCourseReviews(courseId)
@@ -98,9 +109,61 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
 
         // Enroll button click listener
         binding.btnEnroll.setOnClickListener {
-            enrollStudent(courseId, courseData?.CourseTitle ?: "Unknown Course Name")
+            if (!isEnrolled) {
+                enrollStudent(courseId, courseData?.CourseTitle ?: "Unknown Course Name")
+            } else {
+                Toast.makeText(this, "Already enrolled in this course", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+//    private fun fetchCourseDetails(courseId: String) {
+//        val db = FirebaseFirestore.getInstance()
+//        val courseRef = db.collection("Courses").document(courseId)
+//
+//        courseRef.get().addOnSuccessListener { document ->
+//            if (document != null && document.exists()) {
+//                // Fetch course data
+//                courseURL = document.getString("CourseURL") ?: ""
+//
+//
+//                val skillsList = document.get("Skills") as? List<String> ?: emptyList()
+//
+//                // Check if user is enrolled in the course
+//                val studentId = FirebaseAuth.getInstance().currentUser?.uid
+//                val enrollmentRef = db.collection("Enrollments").document(studentId ?: "Unknown ID")
+//
+//                enrollmentRef.get().addOnSuccessListener { enrollmentDoc ->
+//                    if (enrollmentDoc.exists()) {
+//                        val courses = enrollmentDoc.get("courses") as? List<Map<String, Any>> ?: emptyList()
+//                        isEnrolled = courses.any { it["courseId"] == courseId }
+//                        if (isEnrolled) {
+//                            binding.btnEnroll.text = "Already Enrolled"
+//                        }
+//                    }
+//                    fetchLessons(courseRef.id)
+//                }
+//
+//
+//                courseData = Courses(
+//                    CourseId = courseId,
+//                    CourseTitle = document.getString("CourseTitle") ?: "",
+//                    TeacherName = document.getString("TeacherName") ?: "",
+//                    ImageURL = document.getString("ImageURL") ?: "",
+//                    Rating = document.getString("Rating") ?: "",
+//                    CoursePrice = document.getString("CoursePrice") ?: "",
+//                    CourseDescription = document.getString("CourseDescription") ?: "",
+//                    CourseDuration = document.getString("CourseDuration") ?: "",
+//                    Discount = document.getString("Discount") ?: "",
+//                    Certificate = document.getString("Certificate") ?: "",
+//                    CourseLessons = document.getString("CourseLessons") ?: "",
+//                    Skills = skillsList
+//                )
+//                initializePlayer()
+//            }
+//        }
+//    }
+
 
     private fun fetchCourseDetails(courseId: String) {
         val db = FirebaseFirestore.getInstance()
@@ -108,48 +171,66 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
 
         courseRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                val courseTitle = document.getString("CourseTitle") ?: ""
-                val teacherName = document.getString("TeacherName") ?: ""
-                val coursePrice = document.getString("CoursePrice") ?: ""
-                val rating = document.getString("Rating") ?: ""
-                val imageUrl = document.getString("ImageURL") ?: ""
-                val courseDescription = document.getString("CourseDescription") ?: ""
-                val courseDuration = document.getString("CourseDuration") ?: ""
-                val discount = document.getString("Discount") ?: ""
-                val certificate = document.getString("Certificate") ?: ""
-                val courseLesson = document.getString("CourseLessons") ?: ""
+                // Fetch course data
                 courseURL = document.getString("CourseURL") ?: ""
 
+                // Initialize skills list as empty for now
                 val skillsList = mutableListOf<String>()
-                courseRef.collection("Skills").get().addOnSuccessListener { skillsSnapshot ->
-                    for (skillDoc in skillsSnapshot) {
-                        val skillFields = skillDoc.data
-                        skillFields.forEach { (_, value) ->
-                            if (value is String) skillsList.add(value)
+
+                // Fetch the first document from the 'Skills' subcollection
+                val skillsRef = courseRef.collection("Skills")
+                skillsRef.get().addOnSuccessListener { skillsSnapshot ->
+                    if (!skillsSnapshot.isEmpty) {
+                        val skillDoc = skillsSnapshot.documents[0] // Get the first document
+                        val skillFields = skillDoc.data // This will give you all fields as a Map<String, Any>
+                        if (skillFields != null) {
+                            for ((key, value) in skillFields) {
+                                // Assuming the fields represent skills as strings
+                                if (value is String) {
+                                    skillsList.add(value)
+                                }
+                            }
                         }
                     }
 
-                    fetchLessons(courseRef.id)
+                    // Check if user is enrolled in the course
+                    val studentId = FirebaseAuth.getInstance().currentUser?.uid
+                    val enrollmentRef = db.collection("Enrollments").document(studentId ?: "Unknown ID")
 
+                    enrollmentRef.get().addOnSuccessListener { enrollmentDoc ->
+                        if (enrollmentDoc.exists()) {
+                            val courses = enrollmentDoc.get("courses") as? List<Map<String, Any>> ?: emptyList()
+                            isEnrolled = courses.any { it["courseId"] == courseId }
+                            if (isEnrolled) {
+                                binding.btnEnroll.text = "Already Enrolled"
+                            }
+                        }
+                        fetchLessons(courseRef.id)
+                    }
+
+                    // Creating the courseData object and passing the skillsList
                     courseData = Courses(
                         CourseId = courseId,
-                        CourseTitle = courseTitle,
-                        TeacherName = teacherName,
-                        ImageURL = imageUrl,
-                        Rating = rating,
-                        CoursePrice = coursePrice,
-                        CourseDescription = courseDescription,
-                        CourseDuration = courseDuration,
-                        Discount = discount,
-                        Certificate = certificate,
-                        CourseLessons = courseLesson,
+                        CourseTitle = document.getString("CourseTitle") ?: "",
+                        TeacherName = document.getString("TeacherName") ?: "",
+                        ImageURL = document.getString("ImageURL") ?: "",
+                        Rating = document.getString("Rating") ?: "",
+                        CoursePrice = document.getString("CoursePrice") ?: "",
+                        CourseDescription = document.getString("CourseDescription") ?: "",
+                        CourseDuration = document.getString("CourseDuration") ?: "",
+                        Discount = document.getString("Discount") ?: "",
+                        Certificate = document.getString("Certificate") ?: "",
+                        CourseLessons = document.getString("CourseLessons") ?: "",
                         Skills = skillsList
                     )
+
+                    // Initialize player after course data is ready
                     initializePlayer()
                 }
             }
         }
     }
+
 
     private fun fetchLessons(courseId: String) {
         val db = FirebaseFirestore.getInstance()

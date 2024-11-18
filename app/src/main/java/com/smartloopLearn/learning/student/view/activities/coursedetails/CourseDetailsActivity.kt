@@ -117,53 +117,6 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
         }
     }
 
-//    private fun fetchCourseDetails(courseId: String) {
-//        val db = FirebaseFirestore.getInstance()
-//        val courseRef = db.collection("Courses").document(courseId)
-//
-//        courseRef.get().addOnSuccessListener { document ->
-//            if (document != null && document.exists()) {
-//                // Fetch course data
-//                courseURL = document.getString("CourseURL") ?: ""
-//
-//
-//                val skillsList = document.get("Skills") as? List<String> ?: emptyList()
-//
-//                // Check if user is enrolled in the course
-//                val studentId = FirebaseAuth.getInstance().currentUser?.uid
-//                val enrollmentRef = db.collection("Enrollments").document(studentId ?: "Unknown ID")
-//
-//                enrollmentRef.get().addOnSuccessListener { enrollmentDoc ->
-//                    if (enrollmentDoc.exists()) {
-//                        val courses = enrollmentDoc.get("courses") as? List<Map<String, Any>> ?: emptyList()
-//                        isEnrolled = courses.any { it["courseId"] == courseId }
-//                        if (isEnrolled) {
-//                            binding.btnEnroll.text = "Already Enrolled"
-//                        }
-//                    }
-//                    fetchLessons(courseRef.id)
-//                }
-//
-//
-//                courseData = Courses(
-//                    CourseId = courseId,
-//                    CourseTitle = document.getString("CourseTitle") ?: "",
-//                    TeacherName = document.getString("TeacherName") ?: "",
-//                    ImageURL = document.getString("ImageURL") ?: "",
-//                    Rating = document.getString("Rating") ?: "",
-//                    CoursePrice = document.getString("CoursePrice") ?: "",
-//                    CourseDescription = document.getString("CourseDescription") ?: "",
-//                    CourseDuration = document.getString("CourseDuration") ?: "",
-//                    Discount = document.getString("Discount") ?: "",
-//                    Certificate = document.getString("Certificate") ?: "",
-//                    CourseLessons = document.getString("CourseLessons") ?: "",
-//                    Skills = skillsList
-//                )
-//                initializePlayer()
-//            }
-//        }
-//    }
-
 
     private fun fetchCourseDetails(courseId: String) {
         val db = FirebaseFirestore.getInstance()

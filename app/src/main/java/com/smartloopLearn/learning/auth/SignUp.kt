@@ -34,32 +34,12 @@ class SignUp : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser
-                            user?.let {
-                                // Save user data to Firestore
-                                val userData = hashMapOf(
-                                    "name" to binding.etUsername.text.toString(),
-                                    "email" to email,
-                                    "phone" to binding.etPhone.text.toString(),
-                                    "password" to password,
-                                    "user_id" to user.uid,
-                                    "date" to Calendar.getInstance().time.toString()
-                                )
-                                firestore.collection("users").document(user.uid)
-                                    .set(userData)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            this, "Successfully Account Created",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        clearFields()
-                                        val i = Intent(this, Login::class.java)
-                                        startActivity(i)
-                                        finish()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(
-                                            this, "Error: $e", Toast.LENGTH_SHORT).show()
-                                    }
+                            user?.sendEmailVerification()?.addOnCompleteListener { verificationTask ->
+                                if (verificationTask.isSuccessful) {
+                                    saveUserData(user.uid, email, password)
+                                } else {
+                                    Toast.makeText(this, "Failed to send verification email: ${verificationTask.exception?.message}", Toast.LENGTH_LONG).show()
+                                }
                             }
                         } else {
                             Toast.makeText(
@@ -72,56 +52,76 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    // This part of code is shown my validation of sign up page
+    // Function to save user data in Firestore
+    private fun saveUserData(userId: String, email: String, password: String) {
+        val userData = hashMapOf(
+            "name" to binding.etUsername.text.toString(),
+            "email" to email,
+            "phone" to binding.etPhone.text.toString(),
+            "password" to password,
+            "user_id" to userId,
+            "date" to Calendar.getInstance().time.toString(),
+            "isVerified" to false // Field to track email verification
+        )
+
+        firestore.collection("users").document(userId)
+            .set(userData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Verification email sent. Please verify before logging in.", Toast.LENGTH_LONG).show()
+                clearFields()
+                val i = Intent(this, Login::class.java)
+                startActivity(i)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error: $e", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun checkAllField(): Boolean {
         val email = binding.etEmail.text.toString()
-        if(binding.etUsername.text.toString() == ""){
-            binding.etUsername.error = "This is required field"
+        if (binding.etUsername.text.toString().isEmpty()) {
+            binding.etUsername.error = "This is a required field"
             binding.etUsername.requestFocus()
             return false
         }
-        if(binding.etEmail.text.toString() == ""){
-            binding.etEmail.error = "This is required field"
+        if (binding.etEmail.text.toString().isEmpty()) {
+            binding.etEmail.error = "This is a required field"
             binding.etEmail.requestFocus()
             return false
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.etEmail.error = "Check email format"
             binding.etEmail.requestFocus()
             return false
         }
-        if (binding.etPhone.text.toString() == ""){
-            binding.etPhone.error = "This is required field"
+        if (binding.etPhone.text.toString().isEmpty()) {
+            binding.etPhone.error = "This is a required field"
             binding.etPhone.requestFocus()
             return false
         }
-        if ((binding.etPhone.length() < 11) ){
-            binding.etPhone.error = "Enter correct  number"
+        if (binding.etPhone.length() != 11) {
+            binding.etPhone.error = "Enter a valid 11-digit number"
             binding.etPhone.requestFocus()
             return false
         }
-        if ((binding.etPhone.length() > 11) ){
-            binding.etPhone.error = "Enter correct  number"
-            binding.etPhone.requestFocus()
-            return false
-        }
-        if (binding.etPassword.text.toString() == ""){
-            binding.etPassword.error = "This is required field"
+        if (binding.etPassword.text.toString().isEmpty()) {
+            binding.etPassword.error = "This is a required field"
             binding.etPassword.requestFocus()
             return false
         }
-        if (binding.etPassword.length() < 8){
-            binding.etPassword.error = "Password should be 8  characters"
+        if (binding.etPassword.length() < 8) {
+            binding.etPassword.error = "Password should be at least 8 characters"
             binding.etPassword.requestFocus()
             return false
         }
-        if (binding.etConfirmPassword.text.toString() == ""){
-            binding.etConfirmPassword.error = "This is required field"
+        if (binding.etConfirmPassword.text.toString().isEmpty()) {
+            binding.etConfirmPassword.error = "This is a required field"
             binding.etConfirmPassword.requestFocus()
             return false
         }
-        if (binding.etPassword.text.toString() != binding.etConfirmPassword.text.toString()){
-            binding.etConfirmPassword.error = "Password do not match"
+        if (binding.etPassword.text.toString() != binding.etConfirmPassword.text.toString()) {
+            binding.etConfirmPassword.error = "Passwords do not match"
             binding.etConfirmPassword.requestFocus()
             return false
         }
@@ -129,7 +129,6 @@ class SignUp : AppCompatActivity() {
         return true
     }
 
-    // This is used to clear all the data that users entered in the input fields
     private fun clearFields() {
         binding.etUsername.text?.clear()
         binding.etEmail.text?.clear()
@@ -137,7 +136,6 @@ class SignUp : AppCompatActivity() {
         binding.etPassword.text?.clear()
         binding.etConfirmPassword.text?.clear()
 
-        // Clear any errors that come in the fields
         binding.etUsername.error = null
         binding.etEmail.error = null
         binding.etPhone.error = null

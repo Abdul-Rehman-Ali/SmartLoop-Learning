@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.PlayerView
@@ -25,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.smartloopLearn.learning.R
 import com.smartloopLearn.learning.databinding.ActivityCourseDetailsBinding
 import com.smartloopLearn.learning.student.adapter.recyclerview.OnVideoClickListener
-import com.smartloopLearn.learning.student.adapter.recyclerview.SkillsAdapter
 import com.smartloopLearn.learning.student.model.CourseLessons
 import com.smartloopLearn.learning.student.model.CourseReview
 import com.smartloopLearn.learning.student.model.Courses

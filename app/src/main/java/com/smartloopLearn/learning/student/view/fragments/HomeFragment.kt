@@ -69,22 +69,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpCoursesRV() {
+        // Show progress bar before fetching data
+        binding.customProgressBar.visibility = View.VISIBLE
+
         coursesAdapter = CoursesAdapter(coursesList, requireContext())
         binding.rv.adapter = coursesAdapter
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
+
         fetchCoursesFromFirestore()
-    }
-
-    private fun setUpWeProvided() {
-        val adapter = WeProvided(getDataWeProvided(), requireContext())
-        binding.rvWeProvided.adapter = adapter
-        binding.rvWeProvided.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-    }
-
-    private fun setUpContinueCoursesRV() {
-        val adapter = ContinueCoursesAdapter(getDataContinueCourses(), requireContext())
-        binding.rvContinueCourses.adapter = adapter
-        binding.rvContinueCourses.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun fetchCoursesFromFirestore() {
@@ -99,11 +91,54 @@ class HomeFragment : Fragment() {
                     Log.d("Firestore Data", "Fetched Course: $course")  // Log each course
                 }
                 coursesAdapter.notifyDataSetChanged()
+
+                // Hide progress bar when data is loaded
+                binding.customProgressBar.visibility = View.GONE
             }
             .addOnFailureListener { exception ->
+                // Hide progress bar in case of failure
+                binding.customProgressBar.visibility = View.GONE
                 Log.e("Firestore Error", "Error getting documents: ", exception)
             }
     }
+
+
+//    private fun setUpCoursesRV() {
+//        coursesAdapter = CoursesAdapter(coursesList, requireContext())
+//        binding.rv.adapter = coursesAdapter
+//        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
+//        fetchCoursesFromFirestore()
+//    }
+
+    private fun setUpWeProvided() {
+        val adapter = WeProvided(getDataWeProvided(), requireContext())
+        binding.rvWeProvided.adapter = adapter
+        binding.rvWeProvided.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun setUpContinueCoursesRV() {
+        val adapter = ContinueCoursesAdapter(getDataContinueCourses(), requireContext())
+        binding.rvContinueCourses.adapter = adapter
+        binding.rvContinueCourses.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+//    private fun fetchCoursesFromFirestore() {
+//        val db = FirebaseFirestore.getInstance()
+//        db.collection("Courses")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                coursesList.clear()
+//                for (document in result) {
+//                    val course = document.toObject(Courses::class.java)
+//                    coursesList.add(course)
+//                    Log.d("Firestore Data", "Fetched Course: $course")  // Log each course
+//                }
+//                coursesAdapter.notifyDataSetChanged()
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.e("Firestore Error", "Error getting documents: ", exception)
+//            }
+//    }
 
 
     override fun onDestroyView() {

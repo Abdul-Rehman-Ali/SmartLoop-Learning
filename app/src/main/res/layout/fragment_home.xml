@@ -106,6 +106,15 @@
                 android:textStyle="bold"
                 android:layout_alignBaseline="@id/popular_categories" />
 
+            <ProgressBar
+                layout="@layout/custom_loader"
+                android:id="@+id/customProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_centerInParent="true"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"

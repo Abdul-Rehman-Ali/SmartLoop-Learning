@@ -152,7 +152,8 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
                             val courses = enrollmentDoc.get("courses") as? List<Map<String, Any>> ?: emptyList()
                             isEnrolled = courses.any { it["courseId"] == courseId }
                             if (isEnrolled) {
-                                binding.btnEnroll.text = "Already Enrolled"
+//                                binding.btnEnroll.text = "Already Enrolled"
+                                binding.btnEnroll.visibility = View.GONE
                             }
                         }
                         fetchLessons(courseRef.id)

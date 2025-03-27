@@ -12,4 +12,12 @@
     <string name="tv_username">Username</string>
     <string name="default_web_client_id">default_web_client_id</string>
     <string name="sign_in">Sign In</string>
+
+    <string-array name="rating_options">
+        <item>1 ⭐</item>
+        <item>2 ⭐⭐</item>
+        <item>3 ⭐⭐⭐</item>
+        <item>4 ⭐⭐⭐⭐</item>
+        <item>5 ⭐⭐⭐⭐⭐</item>
+    </string-array>
 </resources>

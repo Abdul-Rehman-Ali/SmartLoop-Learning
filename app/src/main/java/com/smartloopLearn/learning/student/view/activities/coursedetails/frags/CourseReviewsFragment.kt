@@ -29,4 +29,3 @@ class CourseReviewsFragment : Fragment(R.layout.fragment_course_reviews) {
         binding.recyclerViewReviews.adapter = adapter
     }
 }
-

@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.smartloopLearn.learning.databinding.ActivityDashboardAdminBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -57,22 +58,45 @@ class DashboardAdmin : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun loadCategories(){
+//    private fun loadCategories(){
+//        categoreyArrayList = ArrayList()
+//        val ref = FirebaseDatabase.getInstance().getReference("Category")
+//        ref.addValueEventListener(object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                categoreyArrayList.clear()
+//                for (ds in snapshot.children){
+//                    val model = ds.getValue(ModelCategorey::class.java)
+//                    categoreyArrayList.add(model!!)
+//                }
+//                adapterCategory = AdapterCategory(this@DashboardAdmin, categoreyArrayList)
+//                binding.rvCategorey.adapter = adapterCategory
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//            }
+//        })
+//    }
+
+    private fun loadCategories() {
         categoreyArrayList = ArrayList()
+
         val ref = FirebaseDatabase.getInstance().getReference("Category")
-        ref.addValueEventListener(object : ValueEventListener{
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 categoreyArrayList.clear()
-                for (ds in snapshot.children){
+                for (ds in snapshot.children) {
                     val model = ds.getValue(ModelCategorey::class.java)
-                    categoreyArrayList.add(model!!)
+                    if (model != null) {
+                        categoreyArrayList.add(model)
+                    }
                 }
                 adapterCategory = AdapterCategory(this@DashboardAdmin, categoreyArrayList)
+                binding.rvCategorey.layoutManager = LinearLayoutManager(this@DashboardAdmin) // ✅ Important
                 binding.rvCategorey.adapter = adapterCategory
             }
+
             override fun onCancelled(error: DatabaseError) {
+                // You can show a toast here if needed
             }
         })
-
     }
 }

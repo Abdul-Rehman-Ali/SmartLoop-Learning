@@ -265,6 +265,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.smartloopLearn.learning.student.view.activities.Home
 import com.smartloopLearn.learning.R
+import com.smartloopLearn.learning.admin.AdminMainActivity
 import java.util.Calendar
 
 class Login : AppCompatActivity() {
@@ -304,7 +305,7 @@ class Login : AppCompatActivity() {
 
             if (checkAllField()) {
                 if (email == "admin@gmail.com" && password == "Csma1039") {
-                    startActivity(Intent(this, DashboardAdmin::class.java))
+                    startActivity(Intent(this, AdminMainActivity::class.java))
                     finish()
                 } else {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->

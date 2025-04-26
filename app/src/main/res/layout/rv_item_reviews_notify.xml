@@ -1,0 +1,64 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/grey"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Reviewer Name and Rating Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textView_reviewerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Reviewer Name"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar_review"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1.5"
+                android:layout_marginStart="-50dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.0"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:stepSize="0.5" />
+        </LinearLayout>
+
+        <!-- Review Description -->
+        <TextView
+            android:id="@+id/textView_reviewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is a sample review description by the student about the course."
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+            <Switch
+                android:id="@+id/switch_approval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Approve Review" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

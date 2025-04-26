@@ -23,6 +23,15 @@
         android:theme="@style/Theme.SmartLoop"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ShowAllReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CourseReviewsActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.AddCourses"
             android:exported="false" />
         <activity

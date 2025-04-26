@@ -1,16 +1,21 @@
 package com.smartloopLearn.learning.student.view.activities.coursedetails
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -76,6 +81,55 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
 
         // Initial fragment to display CourseOverviewFragment
         moveFrag(CourseOverviewFragment())
+
+        binding.btnReviews.setOnClickListener {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_add_review, null)
+
+            val etStudentName = dialogView.findViewById<EditText>(R.id.etStudentName)
+            val ratingBar = dialogView.findViewById<RatingBar>(R.id.ratingBar)
+            val etComment = dialogView.findViewById<EditText>(R.id.etComment)
+
+            val dialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setPositiveButton("Submit") { alertDialog, _ ->
+                    val name = etStudentName.text.toString()
+                    val rating = ratingBar.rating.toString()
+                    val comment = etComment.text.toString()
+
+                    val reviewData = hashMapOf(
+                        "StudentName" to name,
+                        "Rating" to rating,
+                        "Comment" to comment,
+                        "Approved" to false
+                    )
+
+                    if (!courseId.isNullOrEmpty()) {
+                        val db = FirebaseFirestore.getInstance()
+                        db.collection("Courses")
+                            .document(courseId)
+                            .collection("Reviews")
+                            .add(reviewData)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        Toast.makeText(this, "Course ID not found", Toast.LENGTH_SHORT).show()
+                    }
+
+                    alertDialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { alertDialog, _ ->
+                    alertDialog.dismiss()
+                }
+                .create()
+
+            dialog.show()
+        }
+
+
 
         // Tab layout listener to switch between fragments
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -154,6 +208,7 @@ class CourseDetailsActivity : AppCompatActivity(), OnVideoClickListener {
                             if (isEnrolled) {
 //                                binding.btnEnroll.text = "Already Enrolled"
                                 binding.btnEnroll.visibility = View.GONE
+                                binding.btnReviews.visibility = View.VISIBLE
                             }
                         }
                         fetchLessons(courseRef.id)

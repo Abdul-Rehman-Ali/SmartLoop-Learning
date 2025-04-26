@@ -64,6 +64,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
+    <!-- Review Button at the very bottom -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Give Review"
+        app:cornerRadius="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Enroll Button right above the Review Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEnroll"
         android:layout_width="match_parent"
@@ -73,7 +88,9 @@
         android:text="Get Enroll"
         app:cornerRadius="10dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/btnReviews"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

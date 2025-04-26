@@ -11,8 +11,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CourseReview(
+    var CourseId: String = "",
+    var ReviewerId: String = "",
     val StudentName: String = "",
     val Rating: String = "",
+    val Approved: Boolean = false,
 //    val role: String = "Student",  // Default role is "Student"
     val Comment: String = ""
 ) : Parcelable

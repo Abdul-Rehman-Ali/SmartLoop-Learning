@@ -157,9 +157,9 @@ class ShowAllReviewsActivity : AppCompatActivity() {
 
         reviewRef.update("Approved", isChecked)
             .addOnSuccessListener {
-                Toast.makeText(this, "Review approval status updated", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Review approval status updated", Toast.LENGTH_SHORT).show()
 
-                // 👇 Update local list to immediately reflect user change
+                //  Update local list to immediately reflect user change
                 val index = reviewsList.indexOfFirst { it.CourseId == review.CourseId && it.ReviewerId == review.ReviewerId }
                 if (index != -1) {
                     val updatedReview = reviewsList[index].copy(Approved = isChecked)

@@ -271,7 +271,7 @@ class BooksUserFragment : Fragment() {
     private fun loadMostViewDownloadBooks(orderBy: String) {
         pdfArrayList = ArrayList()
         val ref = FirebaseDatabase.getInstance().getReference("Book")
-        ref.orderByChild(orderBy).limitToLast(10)
+        ref.orderByChild(orderBy).limitToLast(20)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pdfArrayList.clear()

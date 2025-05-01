@@ -3,11 +3,12 @@ agp = "8.5.2"
 circleimageview = "3.1.0"
 compiler = "4.15.1"
 exoplayer = "2.19.1"
+googleFirebaseDatabase = "21.0.0"
 imageslideshow = "0.1.2"
-firebaseBom = "33.11.0"
+firebaseBom = "33.13.0"
 junitJupiter = "5.11.0"
 kotlin = "2.1.0"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -23,7 +24,7 @@ googleServices = "4.4.2"
 firebaseAuth = "23.2.0"
 firebaseAuthKtx = "23.2.0"
 firebaseDatabaseKtx = "21.0.0"
-firebaseFirestoreKtx = "25.1.3"
+firebaseFirestoreKtx = "25.1.4"
 firebaseStorage = "21.0.1"
 googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
@@ -36,6 +37,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+firebase-database-v2030 = { module = "com.google.firebase:firebase-database", version.ref = "googleFirebaseDatabase" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestoreKtx" }
 imageslideshow = { module = "com.github.denzcoskun:ImageSlideshow", version.ref = "imageslideshow" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

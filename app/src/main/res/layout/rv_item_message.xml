@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/leftMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="50dp"
+        android:text="Left Message" />
+
+    <TextView
+        android:id="@+id/rightMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#DCF8C6"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:text="Right Message" />
+</RelativeLayout>

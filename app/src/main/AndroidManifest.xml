@@ -23,6 +23,24 @@
         android:theme="@style/Theme.SmartLoop"
         tools:targetApi="31">
         <activity
+            android:name=".chat.AdminChat.UserListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.AdminChat.AdminChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".chat.UserChatActivity"
+            android:exported="true" />
+        <activity
             android:name=".admin.ShowAllReviewsActivity"
             android:exported="false" />
         <activity
@@ -107,15 +125,6 @@
         <activity
             android:name=".admin.CategoryAddActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

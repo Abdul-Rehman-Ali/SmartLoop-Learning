@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.smartloopLearn.learning.chat.AdminChat.UserListActivity
 import com.smartloopLearn.learning.databinding.ActivityAdminMainBinding
 
 class AdminMainActivity : AppCompatActivity() {
@@ -32,6 +33,10 @@ class AdminMainActivity : AppCompatActivity() {
 
         binding.cardCheckReviews.setOnClickListener {
             startActivity(Intent(this, ShowAllReviewsActivity::class.java))
+        }
+
+        binding.tvRealAdminchat.setOnClickListener {
+            startActivity(Intent(this, UserListActivity::class.java))
         }
     }
 }

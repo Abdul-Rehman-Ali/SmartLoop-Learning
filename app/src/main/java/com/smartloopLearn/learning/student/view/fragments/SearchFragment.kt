@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.smartloopLearn.learning.chat.AdminChat.AdminChatActivity
+import com.smartloopLearn.learning.chat.AdminChat.UserListActivity
+import com.smartloopLearn.learning.chat.UserChatActivity
 import com.smartloopLearn.learning.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
@@ -68,6 +71,16 @@ class SearchFragment : Fragment() {
             val number = "+923464298524"
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$number")
+            startActivity(intent)
+        }
+
+        binding.tvRealchat.setOnClickListener {
+            val intent = Intent(requireContext(), UserChatActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvRealAdminchat.setOnClickListener {
+            val intent = Intent(requireContext(), UserListActivity::class.java)
             startActivity(intent)
         }
 

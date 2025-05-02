@@ -53,12 +53,12 @@ class SearchFragment : Fragment() {
 
 
         // Whatsapp Chat
-        binding.whatsapp1.setOnClickListener {
-            val number = "+923464298524"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$number")
-            startActivity(intent)
-        }
+//        binding.whatsapp1.setOnClickListener {
+//            val number = "+923464298524"
+//            val intent = Intent(Intent.ACTION_VIEW)
+//            intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$number")
+//            startActivity(intent)
+//        }
 
         binding.whatsapp2.setOnClickListener {
             val number = "+923464298524"

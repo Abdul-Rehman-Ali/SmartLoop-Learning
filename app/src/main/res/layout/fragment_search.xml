@@ -77,7 +77,7 @@
 
                     <!-- Card View for "Whatsapp" button -->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/whatsapp1"
+                        android:id="@+id/tv_realchat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:radius="8dp"
@@ -101,7 +101,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Whatsapp"
+                                android:text="App Chat"
                                 android:padding="5dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/white"
@@ -312,16 +312,16 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tv_realchat"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:layout_marginStart="10dp"
-            android:text="Real Chat">
+<!--        <TextView-->
+<!--            android:id="@+id/tv_realchat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="Real Chat">-->
 
-        </TextView>
+<!--        </TextView>-->
 
         <TextView
             android:id="@+id/tv_realAdminchat"

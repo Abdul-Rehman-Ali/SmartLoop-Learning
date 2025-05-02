@@ -79,10 +79,10 @@ class SearchFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.tvRealAdminchat.setOnClickListener {
-            val intent = Intent(requireContext(), UserListActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.tvRealAdminchat.setOnClickListener {
+//            val intent = Intent(requireContext(), UserListActivity::class.java)
+//            startActivity(intent)
+//        }
 
     }
 

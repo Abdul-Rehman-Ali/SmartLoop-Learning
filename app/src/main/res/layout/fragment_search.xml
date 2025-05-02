@@ -323,16 +323,16 @@
 
 <!--        </TextView>-->
 
-        <TextView
-            android:id="@+id/tv_realAdminchat"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:layout_marginStart="10dp"
-            android:text="Real Admin Chat">
+<!--        <TextView-->
+<!--            android:id="@+id/tv_realAdminchat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="Real Admin Chat">-->
 
-        </TextView>
+<!--        </TextView>-->
 
         <ImageView
             android:layout_marginTop="15dp"
